@@ -1,9 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from "react";
-import { Image, ImageSourcePropType, StyleSheet, View } from "react-native";
-import images from "../assets/images";
-import theme from "../theme";
-import { Input, Pressable, Spacing, Text } from "./";
+import React from 'react';
+import {View, StyleSheet, Image, ImageSourcePropType} from 'react-native';
+import theme from '../theme';
+import {Text, Pressable, Input, Spacing} from './';
+import images from '../assets/images';
+import {navigate} from '../navigation/NavigationUtils';
+
 
 type ImageHeaderProps = {
   leftIconName?: ImageSourcePropType,
@@ -17,6 +19,7 @@ type ImageHeaderProps = {
   showSearch?: boolean,
   profileImage?: string,
   titleText?: string,
+  hideProfileIcon?: boolean,
 };
 
 const ImageHeader = ({
@@ -25,35 +28,43 @@ const ImageHeader = ({
   onLeftIconPress,
   onRightIconPress,
   onFilterPress = () => {},
-  subTittle = "",
-  searchPlaceHolder = "Search",
+  subTittle = '',
+  searchPlaceHolder = 'Search',
   hideSubHeader = false,
   showSearch = true,
-  profileImage = images.placeholder_image,
-  titleText = "CarYaar",
+  profileImage = 'https://i.pravatar.cc/150?img=3',
+  titleText = 'CarYaar',
+  hideProfileIcon,
 }: ImageHeaderProps) => {
   return (
     <>
       <View style={styles.header}>
         {/* Profile Row */}
         <View style={styles.profileRow}>
-          <Pressable onPress={onLeftIconPress}>
-            <Image source={{ uri: profileImage }} style={styles.avatar} />
-          </Pressable>
-
+          {!hideProfileIcon && (
+            <Pressable
+              onPress={
+                onLeftIconPress
+              }>
+              <Image source={{uri: profileImage}} style={styles.avatar} />
+            </Pressable>
+          )}
           <Text
             hankenGroteskExtraBold
             size={28}
             lineHeight="h2"
-            color={theme.colors.primary}
-          >
+            color={theme.colors.primary}>
             {titleText}
           </Text>
 
-          <Pressable style={styles.bell} onPress={onRightIconPress}>
+          <Pressable
+            style={styles.bell}
+            onPress={
+              onRightIconPress 
+            }>
             <Image
               source={rightIconName || images.notificationOutline}
-              style={{ height: 24, width: 24 }}
+              style={{height: 24, width: 24}}
             />
           </Pressable>
         </View>
@@ -69,7 +80,7 @@ const ImageHeader = ({
               <Image
                 resizeMode="contain"
                 source={images.filter}
-                style={{ height: 24, width: 24 }}
+                style={{height: 24, width: 24}}
               />
             </Pressable>
           </View>
@@ -99,9 +110,9 @@ const styles = StyleSheet.create({
     paddingVertical: theme.sizes.spacing.smd,
   },
   profileRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   avatar: {
     width: theme.sizes.icons.xl,
@@ -113,8 +124,8 @@ const styles = StyleSheet.create({
     height: theme.sizes.icons.xl,
     backgroundColor: theme.colors.gray900,
     borderRadius: theme.sizes.borderRadius.jumbo,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   subHeader: {
     backgroundColor: theme.colors.primaryBlack,
@@ -123,9 +134,9 @@ const styles = StyleSheet.create({
     paddingTop: 12,
   },
   subHeaderTopRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 

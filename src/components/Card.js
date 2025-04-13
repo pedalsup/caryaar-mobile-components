@@ -1,8 +1,7 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import theme from "../theme";
-import Pressable from "./Pressable";
-import Text from "./Text";
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import theme from '../theme';
+import Pressable from './Pressable';
 
 const Card = ({
   cardContainerStyle,
@@ -11,13 +10,15 @@ const Card = ({
   padding,
   noShadow,
   onPress,
+  row,
   style,
 }) => {
   let _padding = padding ?? 20;
 
   const iCardStyle = StyleSheet.flatten([
     styles.card,
-    { padding: _padding },
+    {padding: _padding},
+    row && {flexDirection: 'row'},
     noShadow && styles.noShadow,
     cardContainerStyle,
   ]);
@@ -31,18 +32,18 @@ const Card = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderRadius: theme.sizes.borderRadius.card,
     elevation: 1,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOpacity: 0.05,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
   },
   noShadow: {
     elevation: 0,
-    shadowColor: "transparent",
+    shadowColor: 'transparent',
     shadowOpacity: 0,
-    shadowOffset: { width: 0, height: 0 },
+    shadowOffset: {width: 0, height: 0},
   },
 });
 

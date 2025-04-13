@@ -35,3 +35,4 @@ export { default as GroupWrapper } from "./GroupWrapper";
 export { default as VehicleCard } from "./VehicleCard";
 export { default as DetailInfoCard } from "./DetailInfoCard";
 export { default as CurrencySlider } from "./CurrencySlider";
+export { default as NotificationCard } from "./NotificationCard";
