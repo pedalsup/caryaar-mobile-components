@@ -1,0 +1,23 @@
+{
+  "name": "@caryaar/components",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "types": "src/types/index.js",
+  "react-native": "src/index.js",
+  "private": false,
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-linear-gradient": "*",
+    "react-native-modal": "*",
+    "react-native-fast-image": "*"
+  },
+  "devDependencies": {
+    "react": "^18.0.0",
+    "react-native": "^0.72.0",
+    "react-native-linear-gradient": "^2.6.2"
+  },
+  "files": [
+    "src"
+  ]
+}
