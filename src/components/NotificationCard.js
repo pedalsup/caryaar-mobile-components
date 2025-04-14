@@ -14,7 +14,6 @@ import { theme } from '../theme';
  * @param {ImageSourcePropType} props.imgSource - Image/icon for the card.
  * @param {boolean} [props.showBadge] - Whether to display a status badge.
  * @param {Object} [props.containerStyle] - Custom style for the card container.
- * @param {Object} [props.iconContainerStyle] - Custom style for the icon container.
  */
 const NotificationCard = ({
   title,

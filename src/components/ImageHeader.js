@@ -20,6 +20,8 @@ type ImageHeaderProps = {
   profileImage?: string,
   titleText?: string,
   hideProfileIcon?: boolean,
+  onAddButtonPress?:() => void,
+  showAddBtn?:boolean
 };
 
 const ImageHeader = ({
@@ -35,6 +37,8 @@ const ImageHeader = ({
   profileImage = 'https://i.pravatar.cc/150?img=3',
   titleText = 'CarYaar',
   hideProfileIcon,
+  onAddButtonPress,
+  showAddBtn
 }: ImageHeaderProps) => {
   return (
     <>
@@ -86,7 +90,10 @@ const ImageHeader = ({
           </View>
           {showSearch && (
             <>
-              <Spacing size="md" />
+            <Spacing size="md" />
+                        
+            <View style={{flexDirection:'row',alignItems:'center',}}>
+              <View style={{flex:1}}>
               <Input
                 leftIconName={images.icSearch}
                 isLeftIconVisible
@@ -95,6 +102,13 @@ const ImageHeader = ({
                 themeColor={theme.colors.textSecondary}
                 placeholder={searchPlaceHolder}
               />
+              </View>
+              {showAddBtn && 
+              <Pressable style={{marginLeft: 15,}} onPress={onAddButtonPress}>
+                <Image source={images.icAdd} style={{height: 48,width: 48,resizeMode:'contain'}} />
+              </Pressable>
+              }
+            </View>
             </>
           )}
         </View>
