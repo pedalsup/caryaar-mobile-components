@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import images from '../assets/images';
 import theme from '../theme';
-import {Pressable, Text} from './';
+import { Pressable, Text } from './';
 
 const CustomizeLoanCard = ({description, bannerLabel, onPress}) => {
   return (
