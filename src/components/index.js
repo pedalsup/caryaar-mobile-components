@@ -39,3 +39,4 @@ export { default as NotificationCard } from "./NotificationCard";
 export { default as InfoRow } from "./InfoRow";
 export { default as PartnerCard } from "./PartnerCard";
 export { default as StepTracker } from "./StepTracker";
+export { default as Switch } from "./Switch";
