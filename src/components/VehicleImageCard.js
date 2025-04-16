@@ -12,37 +12,47 @@ const VehicleImageCard = ({
   onDeletePress,
   cardWrapper,
   isView,
+  btnLabel,
+  uploadMedia,
 }) => {
+  const renderImageContent = () => {
+    if (image) {
+      return (
+        <>
+          <Image
+            source={{uri: image}}
+            style={styles.image}
+            defaultSource={images.placeholder_image}
+          />
+          {!isView && (
+            <Pressable onPress={onDeletePress} style={styles.deleteIcon}>
+              <Image source={images.icDelete} style={styles.iconOverlay} />
+            </Pressable>
+          )}
+        </>
+      );
+    }
+
+    return (
+      <View style={[styles.dashedWrapper, styles.uploadImage]}>
+        <Pressable onPress={uploadMedia} style={styles.centeredContent}>
+          <Image source={images.icUpload} style={styles.icon} />
+          <Text type="helper-text" size="caption" textAlign="center">
+            {btnLabel}
+          </Text>
+        </Pressable>
+      </View>
+    );
+  };
+
   return (
     <Card
       style={[styles.card, cardWrapper]}
       padding={0}
-      cardContainerStyle={{
-        paddingHorizontal: 8,
-        paddingVertical: 12,
-      }}>
-      <Text size={'small'}>{label}</Text>
+      cardContainerStyle={{paddingHorizontal: 8, paddingVertical: 12}}>
+      <Text size="small">{label}</Text>
       <Pressable style={styles.imageContainer} onPress={viewImage}>
-        {image ? (
-          <>
-            <Image
-              source={{uri: image}}
-              style={styles.image}
-              defaultSource={images.placeholder_image}
-            />
-            {!isView && (
-              <Pressable onPress={onDeletePress} style={styles.deleteIcon}>
-                <Image source={images.icDelete} style={styles.deleteIcon} />
-              </Pressable>
-            )}
-          </>
-        ) : (
-          <Image
-            source={images.upload_image}
-            resizeMode="contain"
-            style={styles.uploadImage}
-          />
-        )}
+        {renderImageContent()}
         {isView && <Image source={images.viewIcon} style={styles.viewIcon} />}
       </Pressable>
     </Card>
@@ -52,7 +62,6 @@ const VehicleImageCard = ({
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    // margin:6,
     marginHorizontal: 10,
     marginLeft: 0,
     marginBottom: 12,
@@ -72,7 +81,6 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
     borderRadius: 8,
-    padding: 6,
   },
   deleteIcon: {
     position: 'absolute',
@@ -81,11 +89,37 @@ const styles = StyleSheet.create({
     height: 28,
     width: 28,
   },
-  uploadImage: {width: '100%', height: '100%'},
+  iconOverlay: {
+    width: 28,
+    height: 28,
+  },
+  uploadImage: {
+    width: '100%',
+    height: '100%',
+  },
   viewIcon: {
+    position: 'absolute',
     height: 28,
     width: 28,
-    position: 'absolute',
+  },
+  dashedWrapper: {
+    borderWidth: 1.5,
+    borderStyle: 'dashed',
+    borderColor: '#5DB4F2',
+    borderRadius: 12,
+    backgroundColor: '#E9F4FD',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  centeredContent: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  icon: {
+    width: 28,
+    height: 28,
+    marginBottom: 8,
   },
 });
 
