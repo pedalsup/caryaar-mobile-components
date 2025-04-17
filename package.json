@@ -10,7 +10,9 @@
     "react-native": "*",
     "react-native-linear-gradient": "*",
     "react-native-modal": "*",
-    "react-native-fast-image": "*"
+    "react-native-fast-image": "*",
+    "react-native-image-viewing": "*",
+    "react-native-keyboard-aware-scroll-view":"*"
   },
   "devDependencies": {
     "react": "^18.0.0",
