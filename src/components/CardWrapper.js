@@ -16,6 +16,7 @@ const CardWrapper = ({
   showTrailingIcon = false,
   trailingIconSource = images.arrow_right,
   onPress,
+  isStatusBold = false
 }) => {
   return (
     <LinearGradient
@@ -42,7 +43,7 @@ const CardWrapper = ({
               <Image source={trailingIconSource} style={styles.iconStyle} />
             ) : (
               status && (
-                <Text hankenGroteskSemiBold size="small">
+                <Text  hankenGroteskSemiBold={!isStatusBold} hankenGroteskBold={isStatusBold} size="small">
                   {status}
                 </Text>
               )

@@ -35,19 +35,19 @@ const VehicleCard = ({
 }) => {
   const renderHeader = () => (
     <View style={styles.header}>
-      {/* <FastImage
+      <FastImage
         style={styles.logo}
-        source={logo?.uri ? {uri: logo.uri} : images.placeholder_image}
+        source={logo?.uri ? {uri: logo.uri,priority:FastImage.priority.high} : images.placeholder_image}
         // source={{
         //   uri: logo?.uri || images.placeholder_image,
         //   priority: FastImage.priority.high,
         //   cache: FastImage.cacheControl.immutable,
         // }}
         resizeMode={FastImage.resizeMode.cover}
-        fallback
+        // fallback
         defaultSource={images.placeholder_image} // <-- Local fallback
-      /> */}
-      <Image source={logo || images.placeholder_image} style={styles.logo} />
+      />
+      {/* <Image source={logo || images.placeholder_image} style={styles.logo} /> */}
       <View style={styles.flex}>
         <Text
           size="small"

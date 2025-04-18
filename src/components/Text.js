@@ -1,4 +1,5 @@
 // @ts-check
+
 import React from "react";
 import { Text as IText } from "react-native";
 import { theme } from "../theme";
@@ -9,10 +10,39 @@ import {
   computeFontWeight,
 } from "./helper";
 import { styles } from "../styles/Text.style";
-import "../types/Text.types"; // ⬅️ This is key for loading the typedefs
 
 /**
- * @param {ITextProps} props
+ * @typedef {Object} TextProps
+ * @property {string} [color]
+ * @property {number} [size]
+ * @property {string} [weight]
+ * @property {string} [fontFamily]
+ * @property {React.ReactNode} children
+ * @property {string} [type]
+ * @property {import('react-native').TextStyle} [style]
+ * @property {number} [lineHeight]
+ * @property {"auto" | "left" | "right" | "center" | "justify"} [textAlign]
+ * @property {number} [margin]
+ * @property {number} [numberOfLines]
+ * @property {import('react-native').EllipsizeMode} [ellipsizeMode]
+ * @property {boolean} [adjustsFontSizeToFit]
+ * @property {boolean} [hankenGroteskBlack]
+ * @property {boolean} [hankenGroteskBold]
+ * @property {boolean} [hankenGroteskExtraBold]
+ * @property {boolean} [hankenGroteskExtraLight]
+ * @property {boolean} [hankenGroteskLight]
+ * @property {boolean} [hankenGroteskMedium]
+ * @property {boolean} [hankenGroteskRegular]
+ * @property {boolean} [hankenGroteskSemiBold]
+ * @property {boolean} [hankenGroteskThin]
+ * @property {boolean} [poppinsLight]
+ */
+
+/**
+ * Custom Text component for styled typography
+ * 
+ * @param {TextProps} props 
+ * @returns {JSX.Element | null}
  */
 const Text = ({
   color,
@@ -46,6 +76,11 @@ const Text = ({
   const computedFontWeight = computeFontWeight(weight);
   const computeLineHeightVal = computeFontLineHeight(lineHeight);
 
+  /**
+   * Get predefined style object based on text type
+   * @param {string} type
+   * @returns {import('react-native').TextStyle}
+   */
   const getTextComputedStyles = (type) => {
     switch (type) {
       case "helper-text":
@@ -67,6 +102,14 @@ const Text = ({
     }
   };
 
+  /**
+   * Build additional text styles dynamically
+   * @param {number | undefined} size
+   * @param {string | undefined} weight
+   * @param {string | undefined} color
+   * @param {string | undefined} fontFamily
+   * @returns {import('react-native').TextStyle}
+   */
   const getAdditionalComputedStyles = (size, weight, color, fontFamily) => {
     const additionalStyles = {};
     if (size) additionalStyles.fontSize = size;
@@ -114,20 +157,13 @@ const Text = ({
             defaultTextStyle,
             computedStyles,
             additionalComputedStyles,
-            hankenGroteskBlack &&
-              theme.typography.fontStyles.hankenGroteskBlack,
-            hankenGroteskExtraBold &&
-              theme.typography.fontStyles.hankenGroteskExtraBold,
-            hankenGroteskExtraLight &&
-              theme.typography.fontStyles.hankenGroteskExtraLight,
-            hankenGroteskLight &&
-              theme.typography.fontStyles.hankenGroteskLight,
-            hankenGroteskMedium &&
-              theme.typography.fontStyles.hankenGroteskMedium,
-            hankenGroteskRegular &&
-              theme.typography.fontStyles.hankenGroteskRegular,
-            hankenGroteskSemiBold &&
-              theme.typography.fontStyles.hankenGroteskSemiBold,
+            hankenGroteskBlack && theme.typography.fontStyles.hankenGroteskBlack,
+            hankenGroteskExtraBold && theme.typography.fontStyles.hankenGroteskExtraBold,
+            hankenGroteskExtraLight && theme.typography.fontStyles.hankenGroteskExtraLight,
+            hankenGroteskLight && theme.typography.fontStyles.hankenGroteskLight,
+            hankenGroteskMedium && theme.typography.fontStyles.hankenGroteskMedium,
+            hankenGroteskRegular && theme.typography.fontStyles.hankenGroteskRegular,
+            hankenGroteskSemiBold && theme.typography.fontStyles.hankenGroteskSemiBold,
             hankenGroteskThin && theme.typography.fontStyles.hankenGroteskThin,
             hankenGroteskBold && theme.typography.fontStyles.hankenGroteskBold,
             style,

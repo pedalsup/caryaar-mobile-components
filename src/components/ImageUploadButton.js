@@ -37,7 +37,7 @@ const ImageUploadButton = ({
   return (
     <View style={[styles.container, wrapperStyle]}>
       {label ? (
-        <Text type="helper-text" style={styles.label}>
+        <Text type="label" >
           {label}
         </Text>
       ) : null}
@@ -66,8 +66,7 @@ const ImageUploadButton = ({
 const styles = StyleSheet.create({
   container: {},
   label: {
-    marginBottom: 8,
-    color: theme.colors.textPrimary,
+
   },
   uploadBox: {
     borderRadius: 12,
@@ -83,6 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E9F4FD',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal:10
   },
   imagePreview: {
     width: '100%',

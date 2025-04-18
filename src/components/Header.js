@@ -17,7 +17,7 @@ const Header = ({
   iconColor,
   rightLabelColor,
   backgroundColor,
-  hideBorder = false,
+  hideBorder = true,
   isRightDisabled = false,
   showRightContent = false,
   onPressRightContent,
@@ -99,9 +99,9 @@ const Header = ({
             />
           ) : (
             <Text
-              hankenGroteskMedium
+              hankenGroteskBold
               size="small"
-              color={rightLabelColor ?? '#F8A902'}
+              color={rightLabelColor ?? '#F8A90280'}
               style={rightLabelStyle}>
               {rightLabel}
             </Text>

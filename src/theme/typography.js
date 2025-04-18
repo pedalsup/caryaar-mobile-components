@@ -1,3 +1,21 @@
+// @ts-check
+
+/**
+ * Defines standard font weights.
+ * @typedef {Object} FontWeights
+ * @property {'400'} normal
+ * @property {'600'} semibold
+ * @property {'500'} medium
+ * @property {'700'} bold
+ * @property {'300'} light
+ * @property {'100'} thin
+ * @property {'900'} black
+ * @property {'200'} extraLight
+ * @property {'800'} extraBold
+ * @property {'400'} regular
+ */
+
+/** @type {FontWeights} */
 const fontWeights = {
   normal: '400',
   semibold: '600',
@@ -11,6 +29,21 @@ const fontWeights = {
   regular: '400',
 };
 
+/**
+ * Defines available font families.
+ * @typedef {Object} Fonts
+ * @property {string} hankenGroteskBlack
+ * @property {string} hankenGroteskBold
+ * @property {string} hankenGroteskExtraBold
+ * @property {string} hankenGroteskExtraLight
+ * @property {string} hankenGroteskLight
+ * @property {string} hankenGroteskMedium
+ * @property {string} hankenGroteskRegular
+ * @property {string} hankenGroteskSemiBold
+ * @property {string} hankenGroteskThin
+ */
+
+/** @type {Fonts} */
 const fonts = {
   hankenGroteskBlack: 'HankenGrotesk-Black',
   hankenGroteskBold: 'HankenGrotesk-Bold',
@@ -23,6 +56,19 @@ const fonts = {
   hankenGroteskThin: 'HankenGrotesk-Thin',
 };
 
+/**
+ * Defines standard line heights for typography.
+ * @typedef {Object} LineHeights
+ * @property {number} h1
+ * @property {number} h2
+ * @property {number} h3
+ * @property {number} body
+ * @property {number} small
+ * @property {number} caption
+ * @property {number} button
+ */
+
+/** @type {LineHeights} */
 const lineHeights = {
   h1: 40,
   h2: 32,
@@ -33,6 +79,20 @@ const lineHeights = {
   button: 20,
 };
 
+/**
+ * Defines font sizes for various text styles.
+ * @typedef {Object} FontSizes
+ * @property {number} h1
+ * @property {number} h2
+ * @property {number} h3
+ * @property {number} h4
+ * @property {number} body
+ * @property {number} small
+ * @property {number} caption
+ * @property {number} button
+ */
+
+/** @type {FontSizes} */
 const fontSizes = {
   h1: 32,
   h2: 24,
@@ -44,6 +104,12 @@ const fontSizes = {
   button: 16,
 };
 
+/**
+ * Defines complete font style objects combining fontFamily and fontWeight.
+ * @typedef {Object<string, { fontFamily: string, fontWeight: string }>} FontStyles
+ */
+
+/** @type {FontStyles} */
 const fontStyles = {
   hankenGroteskBlack: {
     fontFamily: fonts.hankenGroteskBlack,
@@ -83,6 +149,17 @@ const fontStyles = {
   },
 };
 
+/**
+ * Typography system containing font weights, font families, sizes, line heights, and style combinations.
+ * @typedef {Object} Typography
+ * @property {FontWeights} fontWeights
+ * @property {Fonts} fonts
+ * @property {LineHeights} lineHeights
+ * @property {FontSizes} fontSizes
+ * @property {FontStyles} fontStyles
+ */
+
+/** @type {Typography} */
 const typography = {
   fontWeights,
   fonts,
