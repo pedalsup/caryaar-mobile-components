@@ -13,6 +13,7 @@ const CurrencySlider = ({
   minLabel = formatIndianNumber(0),
   maxLabel = formatIndianNumber(7290000),
   label,
+  ...rest
 }) => {
   return (
     <View style={styles.container}>
@@ -27,6 +28,7 @@ const CurrencySlider = ({
         maximumTrackTintColor="#3DADFF80"
         thumbStyle={styles.thumb}
         trackStyle={styles.track}
+        {...rest}  // <-- spread extra props here
       />
       <View style={styles.labels}>
         <Text type={'label'} hankenGroteskMedium={true}>
@@ -58,16 +60,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderColor: '#1E90FF',
     borderWidth: 4,
-    // shadowColor: '#000',
-    // shadowOffset: {width: 0, height: 2},
-    // shadowOpacity: 0.25,
-    // shadowRadius: 3.84,
-    // elevation: 4,
   },
   labels: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // marginTop: 4,
   },
   labelText: {
     fontSize: 14,
