@@ -18,7 +18,7 @@ export { default as Card } from "./components/Card";
 export { default as RadioBlock } from "./components/RadioBlock";
 export { default as FormFooterButtons } from "./components/FormFooterButtons";
 export { default as FinanceCard } from "./components/FinanceCard";
-export { default as CustomizeLoanCard } from "./components/CustomizeLoanCard";
+export { default as CardWithActionButton } from "./components/CardWithActionButton";
 export { default as RadioGroupRow } from "./components/RadioGroupRow";
 export { default as ImageHeader } from "./components/ImageHeader";
 export { default as CardWrapper } from "./components/CardWrapper";
