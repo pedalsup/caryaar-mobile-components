@@ -23,7 +23,7 @@ export { default as Card } from "./Card";
 export { default as RadioBlock } from "./RadioBlock";
 export { default as FormFooterButtons } from "./FormFooterButtons";
 export { default as FinanceCard } from "./FinanceCard";
-export { default as CustomizeLoanCard } from "./CustomizeLoanCard";
+export { default as CardWithActionButton } from "./CardWithActionButton";
 export { default as RadioGroupRow } from "./RadioGroupRow";
 export { default as ImageHeader } from "./ImageHeader";
 export { default as CardWrapper } from "./CardWrapper";

@@ -80,4 +80,5 @@ export default {
   userGroup: require('./userGroup.png'),
   notification: require('./notification.png'),
   phoneOutline: require('./phoneOutline.png'),
+  moneyCycleIcon: require('./moneyCycleIcon.png'),
 };
