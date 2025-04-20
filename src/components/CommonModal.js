@@ -10,15 +10,40 @@ import {
   StatusBar,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import Text from './Text';
+import {Text,Pressable,Button,Spacing} from './';
 import images from '../assets/images';
-import Pressable from './Pressable';
-import Button from './Button/Button';
-import Spacing from './Spacing';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+
 
 const screenHeight = Dimensions.get('window').height;
 
+/**
+ * @typedef {Object} CommonModalProps
+ * @property {boolean} isVisible
+ * @property {string} [title]
+ * @property {boolean} [showCloseIcon]
+ * @property {React.ReactNode} [children]
+ * @property {boolean} [isPrimaryButtonVisible]
+ * @property {string} [primaryButtonLabel]
+ * @property {function} [onPressPrimaryButton]
+ * @property {object} [modalContentStyle]
+ * @property {boolean} [isScrollableContent]
+ * @property {object} [modalContainerStyle]
+ * @property {function} [onModalHide]
+ * @property {boolean} [isTextCenter]
+ * @property {boolean} [showSecondaryButton]
+ * @property {string} [secondaryButtonText]
+ * @property {function} [onSecondaryPress]
+ * @property {number} [modalHeight] - Custom modal height (in pixels)
+ * @property {boolean} [enableSwipe] - Enable swipe to dismiss
+ * @param {Object} [rest] - Additional props passed to the Modal
+
+ */
+
+/**
+ * CommonModal - Customizable bottom sheet modal
+ *
+ * @param {CommonModalProps} props
+ */
 const CommonModal = ({
   isVisible,
   title = '',
@@ -31,15 +56,17 @@ const CommonModal = ({
   isScrollableContent,
   modalContainerStyle,
   onModalHide = () => {},
+  isTextCenter = true,
+  showSecondaryButton,
+  secondaryButtonText,
+  onSecondaryPress,
+  modalHeight,             // new prop
+  enableSwipe = false ,      // new prop,
+  ...rest
 }) => {
-  const [isModalVisible, setModalVisible] = React.useState(isVisible);
-
-  React.useEffect(() => {
-    setModalVisible(isVisible);
-  }, [isVisible]);
-
   const iModalContentStyle = StyleSheet.flatten([
     styles.modalContainer,
+    { maxHeight: modalHeight || screenHeight * 0.7 }, // Apply custom height
     modalContentStyle,
   ]);
   const iModalContainerStyle = StyleSheet.flatten([
@@ -53,30 +80,30 @@ const CommonModal = ({
   return (
     <Modal
       isVisible={isVisible}
-      onBackdropPress={() => {
-        setModalVisible(!isModalVisible);
-        onModalHide(!isModalVisible);
-      }}
-      onBackButtonPress={() => {
-        setModalVisible(!isModalVisible);
-        onModalHide(!isModalVisible);
-      }}
-      style={styles.modal}>
+      onBackdropPress={onModalHide}
+      onBackButtonPress={onModalHide}
+      animationIn="slideInUp"
+      animationOut="slideOutDown"
+      swipeDirection={enableSwipe ? 'down' : null}  // swipe to dismiss
+      onSwipeComplete={onModalHide}
+      backdropTransitionOutTiming={1}
+      style={styles.modal}
+      {...rest}
+    >
       <KeyboardAvoidingView
         behavior="padding"
         keyboardVerticalOffset={Platform.select({
           ios: 0,
           android: -additionHeight,
         })}
-        style={styles.KeyboardAvoidingViewStyle}>
+        style={styles.keyboardAvoidingView}
+      >
         <View style={iModalContainerStyle}>
           {showCloseIcon && (
             <Pressable
-              onPress={() => {
-                setModalVisible(!isModalVisible);
-                onModalHide(!isModalVisible);
-              }}
-              style={styles.closeBtn}>
+              onPress={onModalHide}
+              style={styles.closeBtn}
+            >
               <Image
                 source={images.closeRound}
                 style={styles.closeImg}
@@ -89,24 +116,33 @@ const CommonModal = ({
               <>
                 <Text
                   size={'h3'}
-                  hankenGroteskExtraBold={true}
-                  textAlign={'center'}>
+                  hankenGroteskBold={true}
+                  textAlign={isTextCenter ? 'center' : 'left'}
+                >
                   {title}
                 </Text>
                 <Spacing size="sm" />
               </>
             )}
             {isScrollableContent ? (
-              <ScrollView>{children}</ScrollView>
+              <ScrollView bounces={false}>{children}</ScrollView>
             ) : (
               children
             )}
             {isPrimaryButtonVisible && (
               <>
                 <Spacing size="md_lg" />
+                <Button label={primaryButtonLabel} onPress={onPressPrimaryButton} />
+                <Spacing size="md" />
+              </>
+            )}
+            {showSecondaryButton && (
+              <>
+                <Spacing size="xs" />
                 <Button
-                  label={primaryButtonLabel}
-                  onPress={onPressPrimaryButton}
+                  label={secondaryButtonText}
+                  variant="link"
+                  onPress={onSecondaryPress}
                 />
                 <Spacing size="md" />
               </>
@@ -127,25 +163,22 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    maxHeight: screenHeight * 0.8,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
   closeBtn: {
-    // position: 'absolute',
     top: -10,
     alignSelf: 'center',
     padding: 6,
     zIndex: 1,
   },
   closeImg: {
-    height: 32,
-    width: 32,
+    height: 40,
+    width: 40,
   },
-  title: {
-    textAlign: 'center',
+  keyboardAvoidingView: {
+    flex: 1,
   },
-  KeyboardAvoidingViewStyle: {flex: 1, maxHeight: screenHeight * 0.8},
   modalContainer: {
     padding: 24,
     backgroundColor: 'white',

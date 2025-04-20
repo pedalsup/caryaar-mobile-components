@@ -1,154 +1,109 @@
+// @ts-nocheck
 import React from 'react';
 import {
   Dimensions,
   FlatList,
-  Image,
   StyleSheet,
-  View,
-  ViewStyle,
+  View
 } from 'react-native';
-import Modal from 'react-native-modal';
-import {Pressable, RadioButton, Spacing, Text} from '.';
-import images from '../assets/images';
+import { CommonModal, RadioButton } from '.';
 import theme from '../theme';
 
 const screenHeight = Dimensions.get('window').height;
 
+/**
+ * DropdownModal - A reusable dropdown modal with selectable options.
+ *
+ * @param {Object} props - Component props
+ * @param {boolean} props.visible - Modal visibility status
+ * @param {Array<Object>} props.data - List of options (array of objects)
+ * @param {string} props.selectedItem - Currently selected item's label
+ * @param {function} props.onSelect - Function called when an item is selected (item, index)
+ * @param {function} props.onClose - Function called when the modal is closed
+ * @param {string} [props.title='Select Option'] - Title displayed at the top of the modal
+ * @param {boolean} [props.showCloseIcon=true] - Whether to show a close icon in the modal
+ * @param {function} [props.customItemRenderer] - Custom renderer for each item (optional)
+ * @param {boolean} [props.showPrimaryButton=false] - Whether to show a primary button at the bottom
+ * @param {function} [props.onPrimaryPress] - Function called when primary button is pressed
+ * @param {Object} [props.containerStyle] - Custom style for the modal container
+ * @param {string} [props.keyValue='label'] - Key to display in the list items
+ * @param {string} [props.primaryButtonLabel] - Label text for the primary button
+ * @param {Object} [props.rest] - Additional props passed to the CommonModal
+ * @returns {JSX.Element} Rendered DropdownModal component
+ */
 const DropdownModal = ({
   visible,
   data = [],
   selectedItem,
   onSelect,
-  onClose,
+  onClose =() => {},
   title = 'Select Option',
   showCloseIcon = true,
   customItemRenderer,
   showPrimaryButton = false,
-  primaryButtonText = '',
   onPrimaryPress,
-  showSecondaryButton = false,
-  secondaryButtonText = '',
-  onSecondaryPress,
   containerStyle,
   keyValue = 'label',
-}: {
-  visible: boolean,
-  data: {label: string, [key: string]: any}[],
-  selectedItem: string,
-  onSelect: (item: any, index: number) => void,
-  onClose: () => void,
-  title?: string,
-  showCloseIcon?: boolean,
-  customItemRenderer?: (item: any, index: number) => React.ReactNode,
-  showPrimaryButton?: boolean,
-  primaryButtonText?: string,
-  onPrimaryPress?: () => void,
-  showSecondaryButton?: boolean,
-  secondaryButtonText?: string,
-  keyValue?: string,
-  onSecondaryPress?: () => void,
-  containerStyle?: ViewStyle,
+  primaryButtonLabel,
+  ...rest
 }) => {
-  const renderItem = ({item, index}) => {
+  /**
+   * Render each item in the dropdown list.
+   * @param {{item: Object, index: number}} param0 - Item data and index
+   * @returns {JSX.Element} Rendered list item
+   */
+  const renderItem = ({ item, index }) => {
     const label = item[keyValue];
     if (customItemRenderer) {
       return customItemRenderer(item, index);
     }
 
     return (
-      <>
-        <RadioButton
-          label={label}
-          selected={selectedItem === label}
-          onPress={() => {
-            onSelect(item, index);
-            onClose();
-          }}
-          marginBottom={theme.sizes.spacing.md}
-        />
-      </>
+      <RadioButton
+        key={index}
+        label={label}
+        selected={selectedItem === label}
+        onPress={() => {
+          onSelect(item, index);
+          onClose();
+        }}
+        marginBottom={theme.sizes.spacing.md}
+      />
     );
   };
 
   return (
-    <Modal
+    <CommonModal
       isVisible={visible}
-      onBackdropPress={onClose}
-      onBackButtonPress={onClose}
-      style={styles.modal}>
+      onModalHide={onClose}
+      title={title}
+      showCloseIcon={showCloseIcon}
+      isScrollableContent={false}
+      isPrimaryButtonVisible={showPrimaryButton}
+      onPressPrimaryButton={onPrimaryPress}
+      primaryButtonLabel={primaryButtonLabel}
+      isTextCenter={false}
+      {...rest}
+    >
       <View style={[styles.container, containerStyle]}>
-        {showCloseIcon && (
-          <Pressable onPress={onClose} style={styles.closeBtn}>
-            <Image
-              source={images.closeRound}
-              style={styles.closeImg}
-              resizeMode="contain"
-            />
-          </Pressable>
-        )}
-
-        <Text hankenGroteskBold size="h3">
-          {title}
-        </Text>
-
-        <Spacing size="md" />
-
         <FlatList
           data={data}
           renderItem={renderItem}
-          keyExtractor={(_, index) => index}
+          keyExtractor={(_, index) => index.toString()}
           style={styles.list}
+          showsVerticalScrollIndicator={false}
         />
-
-        {showPrimaryButton && (
-          <>
-            <Spacing size="md" />
-            <Button label={primaryButtonText} onPress={onPrimaryPress} />
-            <Spacing size="md" />
-          </>
-        )}
-
-        {showSecondaryButton && (
-          <>
-            <Spacing size="md" />
-            <Button
-              label={secondaryButtonText}
-              variant="link"
-              onPress={onSecondaryPress}
-            />
-            <Spacing size="md" />
-          </>
-        )}
       </View>
-    </Modal>
+    </CommonModal>
   );
 };
 
 export default DropdownModal;
 
 const styles = StyleSheet.create({
-  modal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
   container: {
     backgroundColor: '#fff',
-    padding: 24,
-    paddingHorizontal: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    maxHeight: '60%',
-  },
-  closeBtn: {
-    position: 'absolute',
-    top: -50,
-    alignSelf: 'center',
-    padding: 6,
-    zIndex: 1,
-  },
-  closeImg: {
-    height: 32,
-    width: 32,
+    marginTop: 10,
   },
   list: {
     maxHeight: screenHeight * 0.4,
