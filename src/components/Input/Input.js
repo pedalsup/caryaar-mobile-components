@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 import {
   TextInput,
   TouchableOpacity,
   View,
   Image,
   StyleSheet,
-} from 'react-native';
-import {Text} from '..';
-import theme from '../../theme';
-import {styles} from '../../styles/Input.style';
-import images from '../../assets/images';
+} from "react-native";
+import { Text } from "..";
+import theme from "../../theme";
+import { styles } from "../../styles/Input.style";
+import images from "../../assets/images";
 
 /** @typedef {import('./Input.types').InputProps} InputProps */
 
-const LeftIcon = ({leftIcon, leftIconStyle, leftIconName, leftIconColor}) => {
+const LeftIcon = ({ leftIcon, leftIconStyle, leftIconName, leftIconColor }) => {
   return (
     <View style={[styles.leftIcnStyle, leftIconStyle]}>
       {leftIcon ? (
@@ -22,7 +22,7 @@ const LeftIcon = ({leftIcon, leftIconStyle, leftIconName, leftIconColor}) => {
         <Image
           source={leftIconName}
           resizeMode="contain"
-          style={[styles.iconStyle, {tintColor: leftIconColor}]}
+          style={[styles.iconStyle, { tintColor: leftIconColor }]}
         />
       )}
       <View style={styles.divider} />
@@ -49,20 +49,21 @@ const RightIcon = ({
           : onRightIconPress
       }
       disabled={isDisabled}
-      style={[styles.searchIconStyle, rightIconStyle]}>
+      style={[styles.searchIconStyle, rightIconStyle]}
+    >
       {rightIcon ? (
         rightIcon
       ) : isPasswordInput ? (
         <Image
           source={secureTextEntry ? images.eye_open : images.eye_close}
           resizeMode="contain"
-          style={[styles.iconStyle, {tintColor: rightIconColor}]}
+          style={[styles.iconStyle, { tintColor: rightIconColor }]}
         />
       ) : (
         <Image
           source={rightIconName}
           resizeMode="contain"
-          style={[styles.iconStyle, {tintColor: rightIconColor}]}
+          style={[styles.iconStyle, { tintColor: rightIconColor }]}
         />
       )}
     </TouchableOpacity>
@@ -91,7 +92,7 @@ const Input = React.forwardRef((props, ref) => {
     inputStyles,
     value,
     dropdownItemStyle,
-    keyboardType = 'default',
+    keyboardType = "default",
     placeholder,
     onChangeText,
     restProps,
@@ -129,6 +130,7 @@ const Input = React.forwardRef((props, ref) => {
     isAsButton = false,
     themeColor,
     isPasswordInput,
+    autoCapitalize,
   } = props;
   const [isFocused, setIsFocused] = React.useState(false);
   const [secureTextEntry, setSecureTextInput] = React.useState(isPasswordInput);
@@ -143,9 +145,9 @@ const Input = React.forwardRef((props, ref) => {
 
   const inputContainer = [
     {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
       minHeight: 45,
       borderRadius: theme.sizes.borderRadius.md,
       borderWidth: 1,
@@ -174,16 +176,18 @@ const Input = React.forwardRef((props, ref) => {
         style={[
           styles.optionalLabelContainerStyles,
           optionalLabelContainerStyles,
-        ]}>
+        ]}
+      >
         <View>
           {label?.length > 0 && (
             <Text
-              type={'label'}
+              type={"label"}
               style={[
                 styles.label,
-                {color: labelTextColor ?? theme.colors.textSecondary},
+                { color: labelTextColor ?? theme.colors.textSecondary },
                 labelStyles,
-              ]}>
+              ]}
+            >
               {label}
             </Text>
           )}
@@ -191,9 +195,10 @@ const Input = React.forwardRef((props, ref) => {
         <View>
           {optionalLabel?.length > 0 && (
             <Text
-              type={'label'}
+              type={"label"}
               color={theme.colors.textSecondary}
-              style={[styles.optionalLabelStyles, optionalLabelStyle]}>
+              style={[styles.optionalLabelStyles, optionalLabelStyle]}
+            >
               {optionalLabel}
             </Text>
           )}
@@ -203,7 +208,8 @@ const Input = React.forwardRef((props, ref) => {
         disabled={isDisabled || !isAsDropdown}
         activeOpacity={1}
         style={inputContainer}
-        onPress={onPress}>
+        onPress={onPress}
+      >
         {isLeftIconVisible && (
           <LeftIcon
             leftIcon={leftIcon}
@@ -215,10 +221,11 @@ const Input = React.forwardRef((props, ref) => {
         {isAsDropdown || isAsButton ? (
           <View style={iInputStyle}>
             <Text
-              type={'input'}
+              type={"input"}
               style={dropdownItemStyle}
-              ellipsizeMode={'tail'}
-              numberOfLines={1}>
+              ellipsizeMode={"tail"}
+              numberOfLines={1}
+            >
               {value ?? placeholder}
             </Text>
           </View>
@@ -236,28 +243,31 @@ const Input = React.forwardRef((props, ref) => {
               placeholderTextColor ?? theme.colors.placeHolder
             }
             onChangeText={onChangeText}
-            onFocus={e => {
+            onFocus={(e) => {
               handleFocus(true, onFocus ? () => onFocus(e) : () => {});
             }}
-            onBlur={e => {
+            onBlur={(e) => {
               handleFocus(false, onBlur ? () => onBlur(e) : () => {});
             }}
             onSubmitEditing={onSubmitEditing}
             focusable={true}
             returnKeyType={returnKeyType}
             maxLength={maxLength}
+            autoCapitalize={autoCapitalize}
             {...restProps}
           />
         )}
         {rightLabel?.length > 0 && (
           <TouchableOpacity
             onPress={rightLabelPress}
-            disabled={!rightLabelPress}>
+            disabled={!rightLabelPress}
+          >
             <Text
-              type={'status'}
+              type={"status"}
               hankenGroteskBold={true}
               color={rightLabelColor ?? theme.colors.textSecondary}
-              size={theme.typography.fontSizes.small}>
+              size={theme.typography.fontSizes.small}
+            >
               {rightLabel}
             </Text>
           </TouchableOpacity>
@@ -289,7 +299,7 @@ const Input = React.forwardRef((props, ref) => {
             />
           ) : null}
           <Text
-            type={'status'}
+            type={"status"}
             lineHeight={theme.typography.lineHeights.small}
             style={[
               styles.errorMsg,
@@ -300,7 +310,8 @@ const Input = React.forwardRef((props, ref) => {
                     : theme.colors.success,
               },
               statusMsgStyle,
-            ]}>
+            ]}
+          >
             {statusMsg}
           </Text>
         </View>

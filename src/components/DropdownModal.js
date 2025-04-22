@@ -1,15 +1,10 @@
 // @ts-nocheck
-import React from 'react';
-import {
-  Dimensions,
-  FlatList,
-  StyleSheet,
-  View
-} from 'react-native';
-import { CommonModal, RadioButton } from '.';
-import theme from '../theme';
+import React from "react";
+import { Dimensions, FlatList, StyleSheet, View } from "react-native";
+import { CommonModal, RadioButton, Text } from ".";
+import theme from "../theme";
 
-const screenHeight = Dimensions.get('window').height;
+const screenHeight = Dimensions.get("window").height;
 
 /**
  * DropdownModal - A reusable dropdown modal with selectable options.
@@ -36,14 +31,14 @@ const DropdownModal = ({
   data = [],
   selectedItem,
   onSelect,
-  onClose =() => {},
-  title = 'Select Option',
+  onClose = () => {},
+  title = "Select Option",
   showCloseIcon = true,
   customItemRenderer,
   showPrimaryButton = false,
   onPrimaryPress,
   containerStyle,
-  keyValue = 'label',
+  keyValue = "label",
   primaryButtonLabel,
   ...rest
 }) => {
@@ -92,6 +87,20 @@ const DropdownModal = ({
           keyExtractor={(_, index) => index.toString()}
           style={styles.list}
           showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            <View
+              style={{
+                justifyContent: "center",
+                alignContent: "center",
+                alignItems: "center",
+                height: 150,
+              }}
+            >
+              <Text size="h3" hankenGroteskSemiBold color={"#828282"}>
+                No data available
+              </Text>
+            </View>
+          }
         />
       </View>
     </CommonModal>
@@ -102,7 +111,7 @@ export default DropdownModal;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     marginTop: 10,
   },
   list: {
