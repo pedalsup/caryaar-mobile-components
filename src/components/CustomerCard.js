@@ -75,6 +75,7 @@ const CustomerCard = ({
   brandName,
   hideLogo,
   infoRowDetails,
+  customerNameProp
 }) => {
   const renderHeader = () => (
     <View style={styles.header}>
@@ -105,6 +106,7 @@ const CustomerCard = ({
             hankenGroteskSemiBold
             size="small"
             lineHeight="small"
+            {...customerNameProp}
             color={customerNameColor ?? theme.colors.textPrimary}>
             {customerName}
           </Text>

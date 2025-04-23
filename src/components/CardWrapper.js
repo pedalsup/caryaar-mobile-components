@@ -16,7 +16,8 @@ const CardWrapper = ({
   showTrailingIcon = false,
   trailingIconSource = images.arrow_right,
   onPress,
-  isStatusBold = false
+  isStatusBold = false,
+  isLeftTextBold=false
 }) => {
   return (
     <LinearGradient
@@ -31,7 +32,8 @@ const CardWrapper = ({
             {showLeftText && leftText && (
               <Text
                 size="small"
-                hankenGroteskExtraBold
+                hankenGroteskExtraBold={!isLeftTextBold}
+                hankenGroteskBold={isLeftTextBold}
                 lineHeight="body"
                 color={statusTextColor}>
                 {leftText}

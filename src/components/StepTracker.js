@@ -5,7 +5,7 @@ import Text from './Text';
 import theme from '../theme';
 
 const steps = [
-  {label: 'Basic\nDetails', stepId: 1},
+  {label: 'Business\nDetails', stepId: 1},
   {label: 'Business\nLocation', stepId: 2},
   {label: 'Required\nDocuments', stepId: 3},
   {label: 'Banking\nDetails', stepId: 4},

@@ -55,16 +55,16 @@ const Switch = ({initialValue = false, onValueChange = () => {}}) => {
 
 const styles = StyleSheet.create({
   track: {
-    width: 35,
+    width: 33,
     height: 20,
     borderRadius: 15,
     padding: 5,
     justifyContent: 'center',
   },
   thumb: {
-    width: 15,
-    height: 15,
-    borderRadius: 10,
+    width: 14,
+    height: 14,
+    borderRadius: 7,
     backgroundColor: '#FFFFFF',
     // borderWidth: 2,
     // borderColor: '#2196F3',

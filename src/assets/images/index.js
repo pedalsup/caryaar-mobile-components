@@ -81,4 +81,5 @@ export default {
   notification: require('./notification.png'),
   phoneOutline: require('./phoneOutline.png'),
   moneyCycleIcon: require('./moneyCycleIcon.png'),
+  description: require('./description.png'),
 };
