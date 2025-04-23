@@ -1,20 +1,19 @@
-import React from 'react';
+import React from "react";
 import {
-  View,
-  StyleSheet,
   Dimensions,
   Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   StatusBar,
-} from 'react-native';
-import Modal from 'react-native-modal';
-import {Text,Pressable,Button,Spacing} from './';
-import images from '../assets/images';
+  StyleSheet,
+  View,
+} from "react-native";
+import Modal from "react-native-modal";
+import images from "../assets/images";
+import { Button, Pressable, Spacing, Text } from "./";
 
-
-const screenHeight = Dimensions.get('window').height;
+const screenHeight = Dimensions.get("window").height;
 
 /**
  * @typedef {Object} CommonModalProps
@@ -46,11 +45,11 @@ const screenHeight = Dimensions.get('window').height;
  */
 const CommonModal = ({
   isVisible,
-  title = '',
+  title = "",
   showCloseIcon = true,
   children,
   isPrimaryButtonVisible = false,
-  primaryButtonLabel = 'Submit',
+  primaryButtonLabel = "Submit",
   onPressPrimaryButton,
   modalContentStyle,
   isScrollableContent,
@@ -60,8 +59,8 @@ const CommonModal = ({
   showSecondaryButton,
   secondaryButtonText,
   onSecondaryPress,
-  modalHeight,             // new prop
-  enableSwipe = false ,      // new prop,
+  modalHeight, // new prop
+  enableSwipe = false, // new prop,
   ...rest
 }) => {
   const iModalContentStyle = StyleSheet.flatten([
@@ -75,7 +74,7 @@ const CommonModal = ({
   ]);
 
   const additionHeight =
-    Platform.OS === 'ios' ? 0 : StatusBar.currentHeight ?? 0;
+    Platform.OS === "ios" ? 0 : StatusBar.currentHeight ?? 0;
 
   return (
     <Modal
@@ -84,7 +83,7 @@ const CommonModal = ({
       onBackButtonPress={onModalHide}
       animationIn="slideInUp"
       animationOut="slideOutDown"
-      swipeDirection={enableSwipe ? 'down' : null}  // swipe to dismiss
+      swipeDirection={enableSwipe ? "down" : null} // swipe to dismiss
       onSwipeComplete={onModalHide}
       backdropTransitionOutTiming={1}
       style={styles.modal}
@@ -100,10 +99,7 @@ const CommonModal = ({
       >
         <View style={iModalContainerStyle}>
           {showCloseIcon && (
-            <Pressable
-              onPress={onModalHide}
-              style={styles.closeBtn}
-            >
+            <Pressable onPress={onModalHide} style={styles.closeBtn}>
               <Image
                 source={images.closeRound}
                 style={styles.closeImg}
@@ -115,9 +111,9 @@ const CommonModal = ({
             {title && (
               <>
                 <Text
-                  size={'h3'}
+                  size={"h3"}
                   hankenGroteskBold={true}
-                  textAlign={isTextCenter ? 'center' : 'left'}
+                  textAlign={isTextCenter ? "center" : "left"}
                 >
                   {title}
                 </Text>
@@ -131,8 +127,11 @@ const CommonModal = ({
             )}
             {isPrimaryButtonVisible && (
               <>
-                <Spacing size="md_lg" />
-                <Button label={primaryButtonLabel} onPress={onPressPrimaryButton} />
+                {/* <Spacing size="md_lg" /> */}
+                <Button
+                  label={primaryButtonLabel}
+                  onPress={onPressPrimaryButton}
+                />
                 <Spacing size="md" />
               </>
             )}
@@ -158,17 +157,17 @@ export default CommonModal;
 
 const styles = StyleSheet.create({
   modal: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     margin: 0,
   },
   container: {
     flex: 1,
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
   },
   closeBtn: {
     top: -10,
-    alignSelf: 'center',
+    alignSelf: "center",
     padding: 6,
     zIndex: 1,
   },
@@ -181,9 +180,9 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     padding: 24,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    width: '100%',
+    width: "100%",
   },
 });

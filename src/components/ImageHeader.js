@@ -1,11 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {View, StyleSheet, Image, ImageSourcePropType} from 'react-native';
-import theme from '../theme';
-import {Text, Pressable, Input, Spacing} from './';
-import images from '../assets/images';
-import {navigate} from '../navigation/NavigationUtils';
-
+import React from "react";
+import { Image, ImageSourcePropType, StyleSheet, View } from "react-native";
+import images from "../assets/images";
+import theme from "../theme";
+import { Input, Pressable, Spacing, Text } from "./";
 
 type ImageHeaderProps = {
   leftIconName?: ImageSourcePropType,
@@ -20,8 +18,8 @@ type ImageHeaderProps = {
   profileImage?: string,
   titleText?: string,
   hideProfileIcon?: boolean,
-  onAddButtonPress?:() => void,
-  showAddBtn?:boolean
+  onAddButtonPress?: () => void,
+  showAddBtn?: boolean,
 };
 
 const ImageHeader = ({
@@ -30,15 +28,15 @@ const ImageHeader = ({
   onLeftIconPress,
   onRightIconPress,
   onFilterPress = () => {},
-  subTittle = '',
-  searchPlaceHolder = 'Search',
+  subTittle = "",
+  searchPlaceHolder = "Search",
   hideSubHeader = false,
   showSearch = true,
-  profileImage = 'https://i.pravatar.cc/150?img=3',
-  titleText = 'CarYaar',
+  profileImage = "https://i.pravatar.cc/150?img=3",
+  titleText = "CarYaar",
   hideProfileIcon,
   onAddButtonPress,
-  showAddBtn
+  showAddBtn,
 }: ImageHeaderProps) => {
   return (
     <>
@@ -46,29 +44,23 @@ const ImageHeader = ({
         {/* Profile Row */}
         <View style={styles.profileRow}>
           {!hideProfileIcon && (
-            <Pressable
-              onPress={
-                onLeftIconPress
-              }>
-              <Image source={{uri: profileImage}} style={styles.avatar} />
+            <Pressable onPress={onLeftIconPress}>
+              <Image source={{ uri: profileImage }} style={styles.avatar} />
             </Pressable>
           )}
           <Text
             hankenGroteskExtraBold
             size={28}
             lineHeight="h2"
-            color={theme.colors.primary}>
+            color={theme.colors.primaryLight}
+          >
             {titleText}
           </Text>
 
-          <Pressable
-            style={styles.bell}
-            onPress={
-              onRightIconPress 
-            }>
+          <Pressable style={styles.bell} onPress={onRightIconPress}>
             <Image
               source={rightIconName || images.notificationOutline}
-              style={{height: 24, width: 24}}
+              style={{ height: 24, width: 24 }}
             />
           </Pressable>
         </View>
@@ -84,31 +76,37 @@ const ImageHeader = ({
               <Image
                 resizeMode="contain"
                 source={images.filter}
-                style={{height: 24, width: 24}}
+                style={{ height: 24, width: 24 }}
               />
             </Pressable>
           </View>
           {showSearch && (
             <>
-            <Spacing size="md" />
-                        
-            <View style={{flexDirection:'row',alignItems:'center',}}>
-              <View style={{flex:1}}>
-              <Input
-                leftIconName={images.icSearch}
-                isLeftIconVisible
-                inputContainerBackgroundColor="#222222"
-                inputContainerBackgroundColorFocused="#222222"
-                themeColor={theme.colors.textSecondary}
-                placeholder={searchPlaceHolder}
-              />
+              <Spacing size="md" />
+
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View style={{ flex: 1 }}>
+                  <Input
+                    leftIconName={images.icSearch}
+                    isLeftIconVisible
+                    inputContainerBackgroundColor="#222222"
+                    inputContainerBackgroundColorFocused="#222222"
+                    themeColor={theme.colors.textSecondary}
+                    placeholder={searchPlaceHolder}
+                  />
+                </View>
+                {showAddBtn && (
+                  <Pressable
+                    style={{ marginLeft: 15 }}
+                    onPress={onAddButtonPress}
+                  >
+                    <Image
+                      source={images.icAdd}
+                      style={{ height: 48, width: 48, resizeMode: "contain" }}
+                    />
+                  </Pressable>
+                )}
               </View>
-              {showAddBtn && 
-              <Pressable style={{marginLeft: 15,}} onPress={onAddButtonPress}>
-                <Image source={images.icAdd} style={{height: 48,width: 48,resizeMode:'contain'}} />
-              </Pressable>
-              }
-            </View>
             </>
           )}
         </View>
@@ -124,9 +122,9 @@ const styles = StyleSheet.create({
     paddingVertical: theme.sizes.spacing.smd,
   },
   profileRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   avatar: {
     width: theme.sizes.icons.xl,
@@ -138,8 +136,8 @@ const styles = StyleSheet.create({
     height: theme.sizes.icons.xl,
     backgroundColor: theme.colors.gray900,
     borderRadius: theme.sizes.borderRadius.jumbo,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   subHeader: {
     backgroundColor: theme.colors.primaryBlack,
@@ -148,9 +146,9 @@ const styles = StyleSheet.create({
     paddingTop: 12,
   },
   subHeaderTopRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
 
