@@ -127,7 +127,7 @@ const CommonModal = ({
             )}
             {isPrimaryButtonVisible && (
               <>
-                {/* <Spacing size="md_lg" /> */}
+                <Spacing size="md" />
                 <Button
                   label={primaryButtonLabel}
                   onPress={onPressPrimaryButton}

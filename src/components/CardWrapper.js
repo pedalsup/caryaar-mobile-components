@@ -1,31 +1,32 @@
-import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import {Pressable, Text} from '.';
-import theme from '../theme';
-import images from '../assets/images';
+import React from "react";
+import { View, StyleSheet, Image } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
+import { Pressable, Text } from ".";
+import theme from "../theme";
+import images from "../assets/images";
 
 const CardWrapper = ({
   leftText,
   showLeftText = true,
   status,
   children,
-  gradientColors = ['#E8E8E8', '#E8E8E8'],
+  gradientColors = ["#E8E8E8", "#E8E8E8"],
   gradientStops = [1, 1],
-  statusTextColor = 'rgba(0, 0, 0, 0.36)',
+  statusTextColor = "rgba(0, 0, 0, 0.36)",
   showTrailingIcon = false,
   trailingIconSource = images.arrow_right,
   onPress,
   isStatusBold = false,
-  isLeftTextBold=false
+  isLeftTextBold = false,
 }) => {
   return (
     <LinearGradient
       colors={gradientColors}
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 1}}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
       locations={gradientStops}
-      style={styles.gradientContainer}>
+      style={styles.gradientContainer}
+    >
       <Pressable style={styles.wrapper} activeOpacity={1} onPress={onPress}>
         <View style={styles.headerRow}>
           <View style={styles.flex}>
@@ -35,7 +36,8 @@ const CardWrapper = ({
                 hankenGroteskExtraBold={!isLeftTextBold}
                 hankenGroteskBold={isLeftTextBold}
                 lineHeight="body"
-                color={statusTextColor}>
+                color={statusTextColor}
+              >
                 {leftText}
               </Text>
             )}
@@ -45,7 +47,11 @@ const CardWrapper = ({
               <Image source={trailingIconSource} style={styles.iconStyle} />
             ) : (
               status && (
-                <Text  hankenGroteskSemiBold={!isStatusBold} hankenGroteskBold={isStatusBold} size="small">
+                <Text
+                  hankenGroteskSemiBold={!isStatusBold}
+                  hankenGroteskBold={isStatusBold}
+                  size="small"
+                >
                   {status}
                 </Text>
               )
@@ -66,11 +72,11 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   headerRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingHorizontal: 12,
     paddingVertical: 5,
-    alignItems: 'center',
+    alignItems: "center",
   },
   iconStyle: {
     height: theme.sizes.icons.smd,
@@ -80,7 +86,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   alignEnd: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
 });
 

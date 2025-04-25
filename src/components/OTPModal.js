@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
-import CommonModal from './CommonModal';
-import OTPVerification from './OTPVerification';
-import Spacing from './Spacing';
-import Text from './Text';
-import theme from '../theme';
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
+import CommonModal from "./CommonModal";
+import OTPVerification from "./OTPVerification";
+import Spacing from "./Spacing";
+import Text from "./Text";
+import theme from "../theme";
 
 const OTPModal = ({
   isVisible,
@@ -25,7 +25,7 @@ const OTPModal = ({
     setResendEnabled(false);
 
     timerRef.current = setInterval(() => {
-      setCountdown(prev => {
+      setCountdown((prev) => {
         if (prev <= 1) {
           clearInterval(timerRef.current);
           setResendEnabled(true);
@@ -56,40 +56,44 @@ const OTPModal = ({
     <CommonModal
       isVisible={isVisible}
       onModalHide={onModalHide}
-      primaryButtonLabel={'Confirm & Verify'}
+      primaryButtonLabel={"Confirm & Verify"}
       isScrollableContent={true}
       isPrimaryButtonVisible={true}
       title="OTP Verification"
-      onPressPrimaryButton={onPressPrimaryButton}>
+      onPressPrimaryButton={onPressPrimaryButton}
+    >
       <>
-        <View style={{alignItems: 'center'}}>
+        <View style={{ alignItems: "center" }}>
           <Text
-            type={'helper-text'}
-            textAlign={'center'}
-            style={{width: '80%'}}>
-            Enter the 4 Digit Code you received in your mobile{' '}
+            type={"helper-text"}
+            textAlign={"center"}
+            style={{ width: "80%" }}
+          >
+            Enter the 4 Digit Code you received in your mobile{" "}
             <Text
-              type={'helper-text'}
+              type={"helper-text"}
               hankenGroteskBold={true}
-              color={theme.colors.primary}>
+              color={theme.colors.primary}
+            >
               {mobileNumber}
             </Text>
           </Text>
         </View>
 
-        <Spacing size={'md_lg'} />
+        <Spacing size={"md_lg"} />
         <OTPVerification onOtpComplete={onOtpComplete} />
-        <Spacing size={'md_lg'} />
+        <Spacing size={"md_lg"} />
 
-        <Text type={'helper-text'} textAlign={'center'}>
+        <Text type={"helper-text"} textAlign={"center"}>
           Didn't get the OTP?
           <Text
-            type={'helper-text'}
+            type={"helper-text"}
             hankenGroteskBold={true}
             color={theme.colors.primary}
             onPress={handleResend}
-            style={{opacity: resendEnabled ? 1 : 0.5}}>
-            {resendEnabled ? ' Resend' : ` Resend in ${countdown}s`}
+            style={{ opacity: resendEnabled ? 1 : 0.5 }}
+          >
+            {resendEnabled ? " Resend" : ` Resend in ${countdown}s`}
           </Text>
         </Text>
       </>
