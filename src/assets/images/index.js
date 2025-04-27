@@ -82,4 +82,5 @@ export default {
   phoneOutline: require('./phoneOutline.png'),
   moneyCycleIcon: require('./moneyCycleIcon.png'),
   description: require('./description.png'),
+  noData: require('./noData.png'),
 };

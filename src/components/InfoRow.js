@@ -1,8 +1,8 @@
-import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import React from "react";
+import { View, Image, StyleSheet } from "react-native";
 
-import theme from '../theme';
-import {Text} from './';
+import theme from "../theme";
+import { Text } from "./";
 
 /**
  * A reusable information row with an icon and text, with custom styling options.
@@ -38,17 +38,20 @@ const InfoRow = ({
       <Image source={iconSource} style={[styles.icon, iconStyle]} />
       <Text
         size="small"
+        lineHeight={"small"}
         numberOfLines={2}
         ellipsizeMode="tail"
         color={textColor ?? theme.colors.textPrimary}
-        style={[styles.text, textStyle]}>
+        style={[styles.text, textStyle]}
+      >
         {text}
       </Text>
       {suffixText && (
         <Text
           size="small"
           hankenGroteskSemiBold={true}
-          color={suffixTextColor ?? theme.colors.primaryBlack}>
+          color={suffixTextColor ?? theme.colors.primaryBlack}
+        >
           {suffixText}
         </Text>
       )}
@@ -58,8 +61,8 @@ const InfoRow = ({
 
 const styles = StyleSheet.create({
   infoRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   icon: {
     width: 18,

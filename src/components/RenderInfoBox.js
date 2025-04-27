@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {memo, useMemo} from 'react';
-import {View, StyleSheet, StyleProp, ViewStyle} from 'react-native';
-import theme from '../theme';
-import Text from './Text';
+import React, { memo, useMemo } from "react";
+import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
+import theme from "../theme";
+import Text from "./Text";
 
 /**
  * @typedef {Object} InfoItem
@@ -41,24 +41,32 @@ const RenderInfoBox = ({
     <View
       style={StyleSheet.flatten([
         styles.footer,
-        {backgroundColor: infoWrapperColor ?? theme.colors.background},
+        { backgroundColor: infoWrapperColor ?? theme.colors.background },
         containerStyle,
-      ])}>
+      ])}
+    >
       {rows.map((row, rowIndex) => (
         <View
           key={`row-${rowIndex}`}
           style={[
             styles.row,
-            rowIndex !== rows.length - 1 && {marginBottom: 10},
-          ]}>
+            rowIndex !== rows.length - 1 && { marginBottom: 10 },
+          ]}
+        >
           {row.map((item, index) => (
             <View
               key={`item-${index}`}
-              style={StyleSheet.flatten([styles.flexInfoBox, item?.style])}>
-              <Text type="caption" color={labelColor}>
+              style={StyleSheet.flatten([styles.flexInfoBox, item?.style])}
+            >
+              <Text type="caption" color={labelColor} lineHeight={"caption"}>
                 {item.label}
               </Text>
-              <Text hankenGroteskSemiBold size="small" color={infoValueColor}>
+              <Text
+                hankenGroteskSemiBold
+                size="small"
+                lineHeight={"small"}
+                color={infoValueColor}
+              >
                 {item.value}
               </Text>
             </View>
@@ -75,8 +83,8 @@ const styles = StyleSheet.create({
     padding: theme.sizes.spacing.smd,
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   flexInfoBox: {
     flex: 1,

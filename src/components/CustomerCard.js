@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
-import images from '../assets/images';
-import theme from '../theme';
-import {Button, Card, Spacing, Text, RenderInfoBox, InfoRow} from '.';
+import React from "react";
+import { View, Image, StyleSheet } from "react-native";
+import images from "../assets/images";
+import theme from "../theme";
+import { Button, Card, Spacing, Text, RenderInfoBox, InfoRow } from ".";
 
 /**
  * A flexible, reusable card component for displaying customer details, info rows, footer info, and optional actions.
@@ -65,7 +65,7 @@ const CustomerCard = ({
   footerInfo = [],
   showRightIcon = false,
   showButton = false,
-  buttonLabel = '',
+  buttonLabel = "",
   onButtonPress,
   wrapperColor,
   infoWrapperColor,
@@ -75,7 +75,7 @@ const CustomerCard = ({
   brandName,
   hideLogo,
   infoRowDetails,
-  customerNameProp
+  customerNameProp,
 }) => {
   const renderHeader = () => (
     <View style={styles.header}>
@@ -88,7 +88,8 @@ const CustomerCard = ({
             hankenGroteskMedium
             size="small"
             lineHeight="small"
-            color={theme.colors.primary}>
+            color={theme.colors.primary}
+          >
             {brandName}
           </Text>
         )}
@@ -97,17 +98,19 @@ const CustomerCard = ({
             hankenGroteskSemiBold
             size="small"
             lineHeight="small"
-            color={customerIdColor ?? '#F8A902'}>
+            color={customerIdColor ?? "#F8A902"}
+          >
             {customerId}
           </Text>
         )}
         {customerName && (
           <Text
             hankenGroteskSemiBold
-            size="small"
-            lineHeight="small"
+            size="body"
+            lineHeight="body"
             {...customerNameProp}
-            color={customerNameColor ?? theme.colors.textPrimary}>
+            color={customerNameColor ?? theme.colors.textPrimary}
+          >
             {customerName}
           </Text>
         )}
@@ -115,7 +118,8 @@ const CustomerCard = ({
           <Text
             size="small"
             lineHeight="small"
-            color={customerNoteColor ?? theme.colors.textSecondary}>
+            color={customerNoteColor ?? theme.colors.textSecondary}
+          >
             {customerNote}
           </Text>
         )}
@@ -138,7 +142,7 @@ const CustomerCard = ({
             key={`row-${rowIndex}`}
             iconSource={row.icon}
             text={row.value}
-            containerStyle={{marginTop: 5}}
+            containerStyle={{ marginTop: 5 }}
             textColor={row?.color}
           />
         ))}
@@ -151,11 +155,12 @@ const CustomerCard = ({
       cardContainerStyle={[
         styles.cardWrapper,
         cardStyle,
-        {backgroundColor: wrapperColor ?? theme.colors.white},
-        noMargin && {marginTop: 0},
+        { backgroundColor: wrapperColor ?? theme.colors.white },
+        noMargin && { marginTop: 0 },
       ]}
       onPress={onItemPress}
-      noShadow={noShadow}>
+      noShadow={noShadow}
+    >
       {renderHeader()}
 
       <Spacing size="smd" />
@@ -191,8 +196,8 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   logo: {
     width: 80,

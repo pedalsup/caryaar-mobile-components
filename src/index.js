@@ -1,3 +1,4 @@
+export * from "./components/Toast";
 export { default as Text } from "./components/Text";
 
 export { default as SafeAreaWrapper } from "./components/SafeAreaWrapper";
@@ -36,9 +37,10 @@ export { default as PartnerCard } from "./components/PartnerCard";
 export { default as StepTracker } from "./components/StepTracker";
 export { default as Switch } from "./components/Switch";
 export { default as ImagePreviewModal } from "./components/ImagePreviewModal";
-export {default as BasicDetailsForm} from './components/Forms/BasicDetailsForm';
-export {default as LocationDetailsForm} from './components/Forms/LocationDetailsForm';
-export {default as AccountDetailsForm} from './components/Forms/AccountDetailsForm';
-export { default as images } from './assets/images';
+export { default as BasicDetailsForm } from "./components/Forms/BasicDetailsForm";
+export { default as LocationDetailsForm } from "./components/Forms/LocationDetailsForm";
+export { default as AccountDetailsForm } from "./components/Forms/AccountDetailsForm";
+export { default as Status } from "./components/Status";
+export { default as images } from "./assets/images";
 // export * from './assets';
-export { default as theme } from './theme';
+export { default as theme } from "./theme";

@@ -12,7 +12,8 @@
     "react-native-modal": "*",
     "react-native-fast-image": "*",
     "react-native-image-viewing": "*",
-    "react-native-keyboard-aware-scroll-view":"*"
+    "react-native-keyboard-aware-scroll-view": "*",
+    "react-native-toast-message": "*"
   },
   "devDependencies": {
     "react": "^18.0.0",
