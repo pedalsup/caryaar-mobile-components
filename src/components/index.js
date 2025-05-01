@@ -4,7 +4,6 @@
  * @typedef {import('../types/Text.types').ITextProps} TextProps
  */
 export { default as Text } from "./Text";
-
 export { default as SafeAreaWrapper } from "./SafeAreaWrapper";
 export { default as Spacing } from "./Spacing";
 export { default as Pressable } from "./Pressable";
@@ -45,4 +44,5 @@ export { default as BasicDetailsForm } from "./Forms/BasicDetailsForm";
 export { default as LocationDetailsForm } from "./Forms/LocationDetailsForm";
 export { default as AccountDetailsForm } from "./Forms/AccountDetailsForm";
 export { default as Status } from "./Status";
+export { default as FilePickerModal } from "./FilePickerModal";
 export * from "./Toast";

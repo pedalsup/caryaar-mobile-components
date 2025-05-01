@@ -55,7 +55,6 @@ const Status = ({
   borderColor,
 }) => {
   const { color, icon, bgColor, tintColor } = getIconInfo(type);
-  console.log({ tintColor });
   const containerWidth =
     width && typeof width === "string" && width?.includes("%") ? width : width;
 
@@ -66,8 +65,6 @@ const Status = ({
     borderColor: isBorderVisible && borderColor ? borderColor : color,
     borderWidth: isBorderVisible ? 1 : 0,
   };
-
-  console.log({ containerStyle });
 
   const messageStyles = {
     color: isBorderVisible ? theme.colors.textDark : color,
@@ -91,12 +88,7 @@ const Status = ({
           />
         )}
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
-          <Text
-            hankenGroteskSemiBold
-            // size="small"
-            // lineHeight={'small'}
-            style={messageStyles}
-          >
+          <Text hankenGroteskSemiBold style={messageStyles}>
             {message}
           </Text>
         </View>

@@ -1,6 +1,5 @@
 export * from "./components/Toast";
 export { default as Text } from "./components/Text";
-
 export { default as SafeAreaWrapper } from "./components/SafeAreaWrapper";
 export { default as Spacing } from "./components/Spacing";
 export { default as Pressable } from "./components/Pressable";
@@ -42,5 +41,6 @@ export { default as LocationDetailsForm } from "./components/Forms/LocationDetai
 export { default as AccountDetailsForm } from "./components/Forms/AccountDetailsForm";
 export { default as Status } from "./components/Status";
 export { default as images } from "./assets/images";
+export { default as FilePickerModal } from "./components/FilePickerModal";
 // export * from './assets';
 export { default as theme } from "./theme";

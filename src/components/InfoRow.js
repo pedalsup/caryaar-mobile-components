@@ -15,6 +15,7 @@ import { Text } from "./";
  * @param {Object} [props.iconStyle] - Custom style for the icon.
  * @param {Object} [props.textStyle] - Custom style for the text.
  * @param {Object} [props.textColor] - Custom color for the text.
+ * @param {Object} [props.textProp] - Other textProp for the text props.
  * @returns {React.ReactElement}
  *
  * @example
@@ -32,6 +33,7 @@ const InfoRow = ({
   textColor,
   suffixText,
   suffixTextColor,
+  textProp,
 }) => {
   return (
     <View style={[styles.infoRow, containerStyle]}>
@@ -43,6 +45,7 @@ const InfoRow = ({
         ellipsizeMode="tail"
         color={textColor ?? theme.colors.textPrimary}
         style={[styles.text, textStyle]}
+        {...textProp}
       >
         {text}
       </Text>

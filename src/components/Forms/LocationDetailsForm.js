@@ -11,6 +11,7 @@ import {
   Text,
 } from "../../components";
 import theme from "../../theme";
+import { useFormRefs } from "./useFormRefs";
 
 const LocationDetailsForm = React.forwardRef(
   (
@@ -32,41 +33,23 @@ const LocationDetailsForm = React.forwardRef(
       onGoogleMapPress,
       handleNextPress,
       contentContainerStyle,
-      restCompanyProps,
       restInputProps = {},
       dropdownOptions,
       onSelectState = () => {},
     },
     ref
   ) => {
-    const refs = {
-      scrollRef: React.useRef(null),
-      companyName: React.useRef(null),
-      shopOfficeNumber: React.useRef(null),
-      buildingName: React.useRef(null),
-      street: React.useRef(null),
-      area: React.useRef(null),
-      state: React.useRef(null),
-      pincode: React.useRef(null),
-      district: React.useRef(null),
-      googleMapLocation: React.useRef(null),
-    };
-
-    const focusNext = (key) => {
-      refs[key]?.current?.focus();
-    };
-
-    const scrollToInput = (key) => {
-      if (refs.scrollRef?.current && refs[key]?.current) {
-        refs.scrollRef.current.scrollToFocusedInput(refs[key].current, 400);
-      }
-    };
-
-    useImperativeHandle(ref, () => ({
-      refs,
-      focusNext,
-    }));
-
+    const { refs, focusNext, scrollToInput } = useFormRefs([
+      "scrollRef",
+      "companyName",
+      "shopOfficeNumber",
+      "buildingName",
+      "street",
+      "area",
+      "state",
+      "pincode",
+      "district",
+    ]);
     const [showModal, setShowModal] = React.useState(false);
 
     return (
@@ -74,6 +57,12 @@ const LocationDetailsForm = React.forwardRef(
         <KeyboardAwareScrollView
           contentContainerStyle={contentContainerStyle}
           ref={refs.scrollRef}
+          extraHeight={100}
+          enableOnAndroid={true}
+          enableAutomaticScroll={true}
+          keyboardShouldPersistTaps="handled"
+          scrollEnabled={true}
+          keyboardOpeningTime={0}
         >
           <GroupWrapper title="Location Details">
             <Input
@@ -84,11 +73,10 @@ const LocationDetailsForm = React.forwardRef(
               value={companyName}
               onChangeText={(text) => {
                 onChangeCompanyName && onChangeCompanyName(text);
-                scrollToInput("companyName");
               }}
               returnKeyType="next"
               onSubmitEditing={() => focusNext("shopOfficeNumber")}
-              // onFocus={() => scrollToInput("companyName")}
+              onFocus={() => scrollToInput("companyName")}
               {...(restInputProps.companyName || {})}
             />
             <Spacing size="md" />
@@ -100,12 +88,11 @@ const LocationDetailsForm = React.forwardRef(
               value={shopNo}
               onChangeText={(text) => {
                 onChangeShopNo && onChangeShopNo(text);
-                scrollToInput("shopOfficeNumber");
               }}
               returnKeyType="next"
               onSubmitEditing={() => focusNext("buildingName")}
               {...restInputProps}
-              // onFocus={() => scrollToInput("shopOfficeNumber")}
+              onFocus={() => scrollToInput("shopOfficeNumber")}
               {...(restInputProps.shopOfficeNumber || {})}
             />
             <Spacing size="md" />
@@ -117,11 +104,10 @@ const LocationDetailsForm = React.forwardRef(
               value={buildingName}
               onChangeText={(text) => {
                 onChangeBuildingName && onChangeBuildingName(text);
-                scrollToInput("buildingName");
               }}
               returnKeyType="next"
               onSubmitEditing={() => focusNext("street")}
-              // onFocus={() => scrollToInput("buildingName")}
+              onFocus={() => scrollToInput("buildingName")}
               {...(restInputProps.buildingName || {})}
             />
             <Spacing size="md" />
@@ -133,10 +119,9 @@ const LocationDetailsForm = React.forwardRef(
               value={street}
               returnKeyType="next"
               onSubmitEditing={() => focusNext("area")}
-              // onFocus={() => scrollToInput("street")}
+              onFocus={() => scrollToInput("street")}
               onChangeText={(text) => {
                 onChangeStreet && onChangeStreet(text);
-                scrollToInput("street");
               }}
               {...(restInputProps.street || {})}
             />
@@ -149,11 +134,10 @@ const LocationDetailsForm = React.forwardRef(
               value={area}
               onChangeText={(text) => {
                 onChangeArea && onChangeArea(text);
-                scrollToInput("area");
               }}
               returnKeyType="next"
               onSubmitEditing={() => focusNext("pincode")}
-              // onFocus={() => scrollToInput("area")}
+              onFocus={() => scrollToInput("area")}
               {...(restInputProps.area || {})}
             />
             <Spacing size="md" />
@@ -179,10 +163,9 @@ const LocationDetailsForm = React.forwardRef(
               value={pincode}
               onChangeText={(text) => {
                 onChangePincode && onChangePincode(text);
-                scrollToInput("pincode");
               }}
               rightLabel={cityName}
-              // onFocus={() => scrollToInput("pincode")}
+              onFocus={() => scrollToInput("pincode")}
               {...(restInputProps.pincode || {})}
             />
             <Spacing size="md" />

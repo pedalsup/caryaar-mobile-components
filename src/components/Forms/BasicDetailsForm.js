@@ -10,6 +10,7 @@ import {
 } from "../../components";
 import theme from "../../theme";
 import images from "../../assets/images";
+import { useFormRefs } from "./useFormRefs";
 
 const BasicDetailsForm = ({
   businessType,
@@ -27,26 +28,16 @@ const BasicDetailsForm = ({
   buttonLabel,
   restInputProps = {},
 }) => {
-  const refs = {
-    businessName: React.useRef(null),
-    businessType: React.useRef(null),
-    yearsInBusiness: React.useRef(null),
-    monthlyCarSales: React.useRef(null),
-    ownerName: React.useRef(null),
-    mobileNumber: React.useRef(null),
-    emailAddress: React.useRef(null),
-    scrollRef: React.useRef(null),
-  };
-
-  const focusNext = (key) => {
-    refs[key]?.current?.focus();
-  };
-
-  const scrollToInput = (key) => {
-    if (refs.scrollRef?.current && refs[key]?.current) {
-      refs.scrollRef.current.scrollToFocusedInput(refs[key].current, 250);
-    }
-  };
+  const { refs, focusNext, scrollToInput } = useFormRefs([
+    "businessName",
+    "businessType",
+    "yearsInBusiness",
+    "monthlyCarSales",
+    "ownerName",
+    "mobileNumber",
+    "emailAddress",
+    "scrollRef",
+  ]);
 
   const [showModal, setShowModal] = React.useState(false);
 
@@ -55,6 +46,12 @@ const BasicDetailsForm = ({
       <KeyboardAwareScrollView
         contentContainerStyle={contentContainerStyle}
         ref={refs.scrollRef}
+        extraHeight={100}
+        enableOnAndroid={true}
+        enableAutomaticScroll={true}
+        keyboardShouldPersistTaps="handled"
+        scrollEnabled={true}
+        keyboardOpeningTime={0}
       >
         <GroupWrapper title="Basic Detail">
           <Input
@@ -64,8 +61,8 @@ const BasicDetailsForm = ({
             leftIconName={images.businessSuitcase}
             onChangeText={(text) => {
               onChangeBusinessName && onChangeBusinessName(text);
-              scrollToInput("businessName");
             }}
+            onFocus={() => scrollToInput("businessName")}
             returnKeyType="next"
             onSubmitEditing={() => focusNext("yearsInBusiness")}
             {...(restInputProps.businessName || {})}
@@ -83,6 +80,7 @@ const BasicDetailsForm = ({
             }}
             value={businessType}
             placeholder="Select"
+            onFocus={() => scrollToInput("businessType")}
             returnKeyType="next"
             onSubmitEditing={() => focusNext("yearsInBusiness")}
             {...(restInputProps.businessType || {})}
@@ -99,8 +97,8 @@ const BasicDetailsForm = ({
                 keyboardType="decimal-pad"
                 onChangeText={(text) => {
                   onChangeYearsInBusiness && onChangeYearsInBusiness(text);
-                  scrollToInput("yearsInBusiness");
                 }}
+                onFocus={() => scrollToInput("yearsInBusiness")}
                 returnKeyType="next"
                 onSubmitEditing={() => focusNext("monthlyCarSales")}
                 {...(restInputProps.yearsInBusiness || {})}
@@ -114,11 +112,10 @@ const BasicDetailsForm = ({
                 leftIconName={images.businessSuitcase}
                 label="Monthly Car Sales"
                 keyboardType="decimal-pad"
-                returnKeyType="next"
                 onChangeText={(text) => {
                   onChangeMonthlyCarSales && onChangeMonthlyCarSales(text);
-                  scrollToInput("monthlyCarSales");
                 }}
+                onFocus={() => scrollToInput("monthlyCarSales")}
                 returnKeyType="next"
                 onSubmitEditing={() => focusNext("ownerName")}
                 {...(restInputProps.monthlyCarSales || {})}
@@ -136,8 +133,8 @@ const BasicDetailsForm = ({
             leftIconName={images.user}
             onChangeText={(text) => {
               onChangeOwnerName && onChangeOwnerName(text);
-              scrollToInput("ownerName");
             }}
+            onFocus={() => scrollToInput("ownerName")}
             returnKeyType="next"
             onSubmitEditing={() => focusNext("mobileNumber")}
             {...(restInputProps.ownerName || {})}
@@ -152,8 +149,8 @@ const BasicDetailsForm = ({
             maxLength={10}
             onChangeText={(text) => {
               onChangeMobileNumber && onChangeMobileNumber(text);
-              scrollToInput("mobileNumber");
             }}
+            onFocus={() => scrollToInput("mobileNumber")}
             returnKeyType="next"
             onSubmitEditing={() => focusNext("emailAddress")}
             {...(restInputProps.mobileNumber || {})}
@@ -167,8 +164,8 @@ const BasicDetailsForm = ({
             keyboardType="email-address"
             onChangeText={(text) => {
               onChangeEmail && onChangeEmail(text);
-              scrollToInput("emailAddress");
             }}
+            onFocus={() => scrollToInput("emailAddress")}
             returnKeyType="done"
             onSubmitEditing={handleNextPress}
             {...(restInputProps.emailAddress || {})}

@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Card, Pressable, Spacing, Text} from './';
-import theme from '../theme';
-import {isLastRow} from '../utils/helper';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Card, Pressable, Spacing, Text } from "./";
+import theme from "../theme";
+import { isLastRow } from "../utils/helper";
 
 /**
  * A flexible, reusable information card to display labeled details in a grid layout,
@@ -51,12 +51,13 @@ const DetailInfoCard = ({
           <View style={styles.container}>
             {data.map((item, index) => (
               <View
-                key={index}
+                key={`label - ${index}`}
                 style={[
                   styles.itemContainer,
-                  {width: item?.full ? '100%' : '47%'},
-                  isLastRow(index, data, item) && {marginBottom: 0},
-                ]}>
+                  { width: item?.full ? "100%" : "47%" },
+                  isLastRow(index, data, item) && { marginBottom: 0 },
+                ]}
+              >
                 <Text type="helper-text" size="caption">
                   {item.label}
                 </Text>
@@ -72,7 +73,8 @@ const DetailInfoCard = ({
                         : theme.colors.textPrimary
                     }
                     size="small"
-                    lineHeight="small">
+                    lineHeight="small"
+                  >
                     {item.value}
                   </Text>
                 </Pressable>
@@ -88,9 +90,9 @@ const DetailInfoCard = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   itemContainer: {
     marginBottom: 12,

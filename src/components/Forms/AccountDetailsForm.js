@@ -4,13 +4,15 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import images from "../../assets/images";
 import {
   Button,
+  DropdownModal,
   GroupWrapper,
   Input,
   RadioGroupRow,
   Spacing,
-  DropdownModal,
 } from "../../components";
 import theme from "../../theme";
+import AutocompleteInput from "../AutocompleteInput";
+import { useFormRefs } from "./useFormRefs";
 
 const AccountDetailsForm = ({
   branchName,
@@ -28,25 +30,17 @@ const AccountDetailsForm = ({
   dropdownOptions,
   onSelectBank,
   restInputProps = {},
+  onBankNameChange,
+  searchBankNameFromAPI,
+  onSelectSuggestion,
 }) => {
-  const refs = {
-    accountNumber: React.useRef(),
-    accountHolderName: React.useRef(),
-    bankName: React.useRef(),
-    ifscCode: React.useRef(),
-    branchName: React.useRef(),
-    scrollRef: React.useRef(null),
-  };
-
-  const focusNext = (key) => {
-    refs[key]?.current?.focus();
-  };
-
-  const scrollToInput = (key) => {
-    if (refs.scrollRef?.current && refs[key]?.current) {
-      refs.scrollRef.current.scrollToFocusedInput(refs[key].current, 400);
-    }
-  };
+  const { refs, focusNext, scrollToInput } = useFormRefs([
+    "accountNumber",
+    "accountHolderName",
+    "bankName",
+    "ifscCode",
+    "branchName",
+  ]);
 
   const [showModal, setShowModal] = React.useState(false);
 
@@ -55,6 +49,12 @@ const AccountDetailsForm = ({
       <KeyboardAwareScrollView
         ref={refs.scrollRef}
         contentContainerStyle={contentContainerStyle}
+        extraHeight={100}
+        enableOnAndroid={true}
+        enableAutomaticScroll={true}
+        keyboardShouldPersistTaps="handled"
+        scrollEnabled={true}
+        keyboardOpeningTime={0}
       >
         <GroupWrapper title="Account Details">
           <Input
@@ -63,12 +63,10 @@ const AccountDetailsForm = ({
             isLeftIconVisible
             leftIconName={images.bank}
             keyboardType="number-pad"
-            onChangeText={(text) => {
-              onAccountNumberChange && onAccountNumberChange(text);
-              scrollToInput("accountNumber");
-            }}
+            onChangeText={onAccountNumberChange}
             returnKeyType="next"
             onSubmitEditing={() => focusNext("accountHolderName")}
+            onFocus={() => scrollToInput("accountNumber")}
             {...(restInputProps.accountNumber || {})}
           />
           <Spacing size="md" />
@@ -77,26 +75,28 @@ const AccountDetailsForm = ({
             label="Account Holder Name"
             isLeftIconVisible
             leftIconName={images.bank}
-            onChangeText={(text) => {
-              onAccountHolderNameChange && onAccountHolderNameChange(text);
-              scrollToInput("accountHolderName");
-            }}
+            onChangeText={onAccountHolderNameChange}
             returnKeyType="next"
-            onSubmitEditing={() => focusNext("ifscCode")}
+            onSubmitEditing={() => focusNext("bankName")}
+            onFocus={() => scrollToInput("accountHolderName")}
             {...(restInputProps.accountHolderName || {})}
           />
           <Spacing size="md" />
-          <Input
+          <AutocompleteInput
             ref={refs.bankName}
-            label="Bank Name"
-            isLeftIconVisible
-            leftIconName={images.bank}
-            isAsDropdown
-            isRightIconVisible
-            onPress={() => {
-              setShowModal(true);
+            restProps={{
+              label: "Bank Name",
+              isLeftIconVisible: true,
+              leftIconName: images.bank,
+              onChangeText: onBankNameChange,
+              returnKeyType: "next",
+              onSubmitEditing: () => focusNext("ifscCode"),
+              onFocus: () => scrollToInput("bankName"),
             }}
-            value={bankName}
+            fetchSuggestions={searchBankNameFromAPI}
+            onSelectSuggestion={onSelectSuggestion}
+            value={restInputProps.bankName?.value || ""}
+            suggestionTextKey={"bank"}
             {...(restInputProps.bankName || {})}
           />
           <Spacing size="md" />
@@ -105,16 +105,21 @@ const AccountDetailsForm = ({
             label="IFSC Code"
             isLeftIconVisible
             leftIconName={images.bank}
-            rightLabel={branchName}
-            onChangeText={(text) => {
-              onIFSCCodeChange && onIFSCCodeChange(text);
-              scrollToInput("ifscCode");
-            }}
+            onChangeText={onIFSCCodeChange}
+            onFocus={() => scrollToInput("ifscCode")}
             {...(restInputProps.ifscCode || {})}
           />
           <Spacing size="md" />
+          <Input
+            ref={refs.branchName}
+            label="Branch Name"
+            isLeftIconVisible
+            leftIconName={images.bank}
+            {...(restInputProps.branchName || {})}
+          />
+          <Spacing size="md" />
           <RadioGroupRow
-            label={"Settlement Preference"}
+            label="Settlement Preference"
             options={transferModes}
             selectedValue={selectedTransferMode}
             onChange={onTransferModeSelect}
@@ -124,13 +129,12 @@ const AccountDetailsForm = ({
         <Spacing size="xl" />
         <Button label={buttonName} onPress={onButtonPress} />
       </KeyboardAwareScrollView>
+
       <DropdownModal
         visible={showModal}
         data={dropdownOptions}
         selectedItem={bankName}
-        onSelect={(item, index) => {
-          onSelectBank && onSelectBank(item, index);
-        }}
+        onSelect={(item, index) => onSelectBank && onSelectBank(item, index)}
         onClose={() => setShowModal(false)}
         title="Select Business Type"
       />

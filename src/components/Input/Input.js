@@ -140,6 +140,7 @@ const Input = React.forwardRef((props, ref) => {
     {
       color: themeColor ?? theme.colors.textPrimary,
     },
+    isDisabled && { color: theme.colors.textSecondary },
     inputStyles,
   ]);
 
