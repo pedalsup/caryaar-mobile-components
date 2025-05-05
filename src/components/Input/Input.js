@@ -43,9 +43,9 @@ const RightIcon = ({
 }) => {
   return (
     <TouchableOpacity
-      onPress={() =>
+      onPress={
         isPasswordInput
-          ? setSecureTextInput(!secureTextEntry)
+          ? () => setSecureTextInput(!secureTextEntry)
           : onRightIconPress
       }
       disabled={isDisabled}

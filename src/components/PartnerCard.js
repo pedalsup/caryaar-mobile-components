@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {Button, Card, InfoRow, Spacing, Text} from '.';
-import {Image, View, StyleSheet} from 'react-native';
-import theme from '../theme';
-import images from '../assets/images';
+import React from "react";
+import { Button, Card, InfoRow, Spacing, Text } from ".";
+import { Image, View, StyleSheet } from "react-native";
+import theme from "../theme";
+import images from "../assets/images";
 
 /**
  * Reusable PartnerCard component to display partner details, status, contact info, errors, processing time, notes and a CTA.
@@ -68,7 +68,7 @@ const PartnerCard = ({
   statusObject,
   documentError = [],
   isCTAShow = false,
-  buttonLabel = '',
+  buttonLabel = "",
   callToAction,
   processingTime,
   cardStyle,
@@ -86,16 +86,18 @@ const PartnerCard = ({
       cardContainerStyle={[
         styles.cardWrapper,
         cardStyle,
-        {backgroundColor: wrapperColor ?? theme.colors.white},
-        noMargin && {marginTop: 0},
-      ]}>
+        { backgroundColor: wrapperColor ?? theme.colors.white },
+        noMargin && { marginTop: 0 },
+      ]}
+    >
       {/* Header */}
       <View style={styles.row}>
         <View style={styles.flex}>
           <Text
             hankenGroteskMedium
             style={styles.partnerName}
-            color={partnerColor ?? theme.colors.primaryBlack}>
+            color={partnerColor ?? theme.colors.primaryBlack}
+          >
             {name}
           </Text>
           {subtitle && (
@@ -139,7 +141,7 @@ const PartnerCard = ({
         <View style={styles.infoRowGroup}>
           <InfoRow
             text={phone}
-            iconSource={images.callOutline}
+            iconSource={images.phoneOutline}
             containerStyle={styles.phoneInfo}
           />
           <InfoRow
@@ -191,21 +193,21 @@ const PartnerCard = ({
 };
 
 const styles = StyleSheet.create({
-  flex: {flex: 1},
+  flex: { flex: 1 },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   partnerName: {
-    width: '90%',
+    width: "90%",
   },
   arrowIcon: {
     height: theme.sizes.icons.smd,
     width: theme.sizes.icons.smd,
   },
   infoRowGroup: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: theme.sizes.spacing.smd,
   },
   phoneInfo: {
@@ -216,7 +218,8 @@ const styles = StyleSheet.create({
   },
   documentError: {
     marginTop: theme.sizes.spacing.sm,
-    backgroundColor: '#B6000312',
+    backgroundColor: "#FF5B5E28",
+    // backgroundColor: "#B6000312",
     padding: theme.sizes.spacing.smd,
     borderRadius: theme.sizes.borderRadius.md,
   },

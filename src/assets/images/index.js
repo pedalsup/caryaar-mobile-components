@@ -86,4 +86,5 @@ export default {
   file_gallery: require("./file_gallery.png"),
   file_camera: require("./file_camera.png"),
   file_documents: require("./file_documents.png"),
+  cancel: require("./cancel.png"),
 };

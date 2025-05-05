@@ -30,7 +30,7 @@ import { isLastRow } from "../utils/helper";
  */
 const DetailInfoCard = ({
   data = [],
-  label,
+  label = "",
   isSemiBold,
   children,
   bottom = false,
@@ -51,7 +51,7 @@ const DetailInfoCard = ({
           <View style={styles.container}>
             {data.map((item, index) => (
               <View
-                key={`label - ${index}`}
+                key={`${item.label} - ${index}`}
                 style={[
                   styles.itemContainer,
                   { width: item?.full ? "100%" : "47%" },
