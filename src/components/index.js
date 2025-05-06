@@ -46,4 +46,5 @@ export { default as AccountDetailsForm } from "./Forms/AccountDetailsForm";
 export { default as Status } from "./Status";
 export { default as FilePickerModal } from "./FilePickerModal";
 export { default as DocumentRow } from "./DocumentRow";
+export { default as Dropdown } from "./Dropdown";
 export * from "./Toast";

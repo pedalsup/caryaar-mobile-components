@@ -21,7 +21,7 @@ const baseStyles = {
   borderLeftWidth: 5,
   borderWidth: 1,
   width: "100%",
-  // paddingHorizontal: 20,
+  paddingHorizontal: 20,
   ...(Platform.OS === "web" && {
     maxWidth: width >= 420 ? 420 : "calc(100% - 20px)",
   }),

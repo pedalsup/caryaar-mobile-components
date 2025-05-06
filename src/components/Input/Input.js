@@ -226,6 +226,11 @@ const Input = React.forwardRef((props, ref) => {
               style={dropdownItemStyle}
               ellipsizeMode={"tail"}
               numberOfLines={1}
+              color={
+                isDisabled
+                  ? theme.colors.textSecondary
+                  : theme.colors.textPrimary
+              }
             >
               {value ?? placeholder}
             </Text>

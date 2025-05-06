@@ -9,33 +9,32 @@ const getIconInfo = (status) => {
   switch (status) {
     case "success":
       return {
-        icon: images.successCheck,
+        icon: images.everything_ok,
         color: theme.colors.darkGreen,
         bgColor: theme.colors.lightestGreen,
       };
     case "error":
       return {
-        icon: images.infoStatus,
+        icon: images.critical_alert,
         color: theme.colors.error,
         bgColor: theme.colors.lightestRed,
       };
     case "warning":
       return {
-        icon: images.infoStatus,
+        icon: images.warning,
         color: theme.colors.warning,
         bgColor: theme.colors.lightestOrange,
       };
     case "info":
       return {
-        icon: images.infoStatus,
+        icon: images.info,
         color: theme.colors.darkBlue,
-        bgColor: theme.colors.lightBlue,
-        tintColor: theme.colors.darkBlue,
+        bgColor: theme.colors.white,
       };
     default:
       return {
-        icon: images.infoStatus,
-        color: theme.colors.textDark,
+        icon: images.info,
+        color: theme.colors.textPrimary,
         bgColor: theme.colors.white,
       };
   }
@@ -88,7 +87,7 @@ const Status = ({
           />
         )}
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
-          <Text hankenGroteskSemiBold style={messageStyles}>
+          <Text hankenGroteskBold style={messageStyles}>
             {message}
           </Text>
         </View>

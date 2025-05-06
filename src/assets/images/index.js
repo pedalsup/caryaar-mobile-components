@@ -87,4 +87,8 @@ export default {
   file_camera: require("./file_camera.png"),
   file_documents: require("./file_documents.png"),
   cancel: require("./cancel.png"),
+  everything_ok: require("./everything_ok.png"),
+  icon_info: require("./icon_info.png"),
+  warning: require("./warning.png"),
+  critical_alert: require("./critical_alert.png"),
 };

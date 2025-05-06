@@ -14,35 +14,36 @@ import images from "../assets/images";
 import { Button, Pressable, Spacing, Text } from "./";
 
 const screenHeight = Dimensions.get("window").height;
-
 /**
  * @typedef {Object} CommonModalProps
- * @property {boolean} isVisible
- * @property {string} [title]
- * @property {boolean} [showCloseIcon]
- * @property {React.ReactNode} [children]
- * @property {boolean} [isPrimaryButtonVisible]
- * @property {string} [primaryButtonLabel]
- * @property {function} [onPressPrimaryButton]
- * @property {object} [modalContentStyle]
- * @property {boolean} [isScrollableContent]
- * @property {object} [modalContainerStyle]
- * @property {function} [onModalHide]
- * @property {boolean} [isTextCenter]
- * @property {boolean} [showSecondaryButton]
- * @property {string} [secondaryButtonText]
- * @property {function} [onSecondaryPress]
- * @property {number} [modalHeight] - Custom modal height (in pixels)
- * @property {boolean} [enableSwipe] - Enable swipe to dismiss
- * @param {Object} [rest] - Additional props passed to the Modal
-
+ * @property {boolean} isVisible - Controls whether the modal is visible.
+ * @property {string} [title] - Optional title displayed at the top of the modal.
+ * @property {boolean} [showCloseIcon=true] - Whether to show the close (X) icon.
+ * @property {React.ReactNode} [children] - Content to render inside the modal.
+ * @property {boolean} [isPrimaryButtonVisible=false] - Show the primary action button.
+ * @property {string} [primaryButtonLabel="Submit"] - Label for the primary action button.
+ * @property {() => void} [onPressPrimaryButton] - Callback when the primary button is pressed.
+ * @property {Object} [modalContentStyle] - Style object for modal content container.
+ * @property {boolean} [isScrollableContent] - Whether the modal content should be scrollable.
+ * @property {Object} [modalContainerStyle] - Style object for the outer modal container.
+ * @property {() => void} [onModalHide=() => {}] - Callback when the modal is dismissed.
+ * @property {boolean} [isTextCenter=true] - Whether the title text should be center aligned.
+ * @property {boolean} [showSecondaryButton] - Whether to show a secondary (link) button.
+ * @property {string} [secondaryButtonText] - Text for the secondary button.
+ * @property {() => void} [onSecondaryPress] - Callback when the secondary button is pressed.
+ * @property {number} [modalHeight] - Custom modal height in pixels.
+ * @property {boolean} [enableSwipe=false] - Enable swipe-to-dismiss gesture.
+ * @property {boolean} [showsVerticalScrollIndicator=false] - Show scroll indicator in scrollable content.
+ * @property {boolean} [bounces=false] - Enable bounce effect for scrollable content.
+ * @property {Object} [rest] - Additional props passed to the underlying Modal component.
  */
 
 /**
- * CommonModal - Customizable bottom sheet modal
+ * CommonModal - A customizable bottom sheet modal with optional title, buttons, and scrollable content.
  *
- * @param {CommonModalProps} props
+ * @param {CommonModalProps} props - Props for configuring the modal behavior and appearance.
  */
+
 const CommonModal = ({
   isVisible,
   title = "",
@@ -59,8 +60,10 @@ const CommonModal = ({
   showSecondaryButton,
   secondaryButtonText,
   onSecondaryPress,
-  modalHeight, // new prop
-  enableSwipe = false, // new prop,
+  modalHeight,
+  enableSwipe = false,
+  showsVerticalScrollIndicator = false,
+  bounces = false,
   ...rest
 }) => {
   const iModalContentStyle = StyleSheet.flatten([
@@ -121,7 +124,12 @@ const CommonModal = ({
               </>
             )}
             {isScrollableContent ? (
-              <ScrollView bounces={false}>{children}</ScrollView>
+              <ScrollView
+                bounces={bounces}
+                showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+              >
+                {children}
+              </ScrollView>
             ) : (
               children
             )}
@@ -167,13 +175,14 @@ const styles = StyleSheet.create({
   },
   closeBtn: {
     top: -10,
-    alignSelf: "center",
+    // alignSelf: "center",
     padding: 6,
     zIndex: 1,
+    left: -15,
   },
   closeImg: {
-    height: 40,
-    width: 40,
+    height: 48,
+    width: 48,
   },
   keyboardAvoidingView: {
     flex: 1,
