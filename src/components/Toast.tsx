@@ -18,10 +18,10 @@ const baseStyles = {
   borderRadius: "rounded",
   borderBottomLeftRadius: 8,
   borderTopLeftRadius: 8,
-  borderLeftWidth: 5,
+  borderLeftWidth: 8,
   borderWidth: 1,
   width: "100%",
-  paddingHorizontal: 20,
+  paddingHorizontal: 10,
   ...(Platform.OS === "web" && {
     maxWidth: width >= 420 ? 420 : "calc(100% - 20px)",
   }),

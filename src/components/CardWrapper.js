@@ -18,14 +18,23 @@ const CardWrapper = ({
   onPress,
   isStatusBold = false,
   isLeftTextBold = false,
+  marginBottom = theme.sizes.spacing.md,
+  cardWrapperStyle,
+  disableMargin = true,
 }) => {
+  const iWrapperStyle = StyleSheet.flatten([
+    styles.gradientContainer,
+    { marginBottom: disableMargin ? 0 : marginBottom },
+    cardWrapperStyle,
+  ]);
+
   return (
     <LinearGradient
       colors={gradientColors}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       locations={gradientStops}
-      style={styles.gradientContainer}
+      style={iWrapperStyle}
     >
       <Pressable style={styles.wrapper} activeOpacity={1} onPress={onPress}>
         <View style={styles.headerRow}>

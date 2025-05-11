@@ -79,17 +79,14 @@ const PartnerCard = ({
   showRightArrow = true,
   textNote,
 }) => {
+  const iWrapperStyle = StyleSheet.flatten([
+    cardStyle,
+    { backgroundColor: wrapperColor ?? theme.colors.white },
+    { marginTop: noMargin ? 0 : theme.sizes.spacing.md },
+  ]);
+
   return (
-    <Card
-      padding={16}
-      onPress={onPress}
-      cardContainerStyle={[
-        styles.cardWrapper,
-        cardStyle,
-        { backgroundColor: wrapperColor ?? theme.colors.white },
-        noMargin && { marginTop: 0 },
-      ]}
-    >
+    <Card padding={16} onPress={onPress} cardContainerStyle={iWrapperStyle}>
       {/* Header */}
       <View style={styles.row}>
         <View style={styles.flex}>

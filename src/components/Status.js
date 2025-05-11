@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from "react";
-import { View, Image } from "react-native";
-import Text from "./Text";
+import { Image, View } from "react-native";
 import { images } from "../assets";
 import theme from "../theme";
+import Text from "./Text";
 
 const getIconInfo = (status) => {
   switch (status) {
@@ -27,13 +27,13 @@ const getIconInfo = (status) => {
       };
     case "info":
       return {
-        icon: images.info,
+        icon: images.icon_info,
         color: theme.colors.darkBlue,
         bgColor: theme.colors.white,
       };
     default:
       return {
-        icon: images.info,
+        icon: images.icon_info,
         color: theme.colors.textPrimary,
         bgColor: theme.colors.white,
       };
@@ -52,6 +52,7 @@ const Status = ({
   isBgVisible = true,
   isBorderVisible = false,
   borderColor,
+  iconSize = 22,
 }) => {
   const { color, icon, bgColor, tintColor } = getIconInfo(type);
   const containerWidth =
@@ -59,7 +60,7 @@ const Status = ({
 
   const defaultCardStyle = {
     backgroundColor: isBgVisible ? bgColor : "transparent",
-    paddingVertical: isBgVisible || isBorderVisible ? 10 : 0,
+    paddingVertical: isBgVisible || isBorderVisible ? 12 : 0,
     paddingHorizontal: 10,
     borderColor: isBorderVisible && borderColor ? borderColor : color,
     borderWidth: isBorderVisible ? 1 : 0,
@@ -83,11 +84,16 @@ const Status = ({
           <Image
             resizeMode="contain"
             source={icon}
-            style={{ height: 20, width: 20 }}
+            style={{ height: iconSize, width: iconSize }}
           />
         )}
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
-          <Text hankenGroteskBold style={messageStyles}>
+          <Text
+            hankenGroteskBold
+            size={"body"}
+            style={messageStyles}
+            lineHeight={"small"}
+          >
             {message}
           </Text>
         </View>
