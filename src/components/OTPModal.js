@@ -14,6 +14,9 @@ const OTPModal = ({
   initialCountdown = 10, // default 30s timer
   onResendPress,
   onOtpComplete,
+  isCancellable = false,
+  isError,
+  errorMessage,
 }) => {
   const [countdown, setCountdown] = useState(initialCountdown);
   const [resendEnabled, setResendEnabled] = useState(false);
@@ -61,6 +64,7 @@ const OTPModal = ({
       isPrimaryButtonVisible={true}
       title="OTP Verification"
       onPressPrimaryButton={onPressPrimaryButton}
+      isCancellable={isCancellable}
     >
       <>
         <View style={{ alignItems: "center" }}>
@@ -82,6 +86,19 @@ const OTPModal = ({
 
         <Spacing size={"md_lg"} />
         <OTPVerification onOtpComplete={onOtpComplete} />
+
+        {isError && (
+          <>
+            <Spacing size={"smd"} />
+            <Text
+              textAlign={"center"}
+              type={"status"}
+              color={theme.colors.error}
+            >
+              {errorMessage}
+            </Text>
+          </>
+        )}
         <Spacing size={"md_lg"} />
 
         <Text type={"helper-text"} textAlign={"center"}>

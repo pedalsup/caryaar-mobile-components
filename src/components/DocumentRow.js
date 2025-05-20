@@ -29,8 +29,6 @@ const DocumentRow = ({
 }) => {
   const actionColor = isLoading
     ? theme.colors.placeHolder
-    : showError
-    ? theme.colors.error
     : theme.colors.primary;
 
   return (

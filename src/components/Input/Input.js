@@ -232,7 +232,7 @@ const Input = React.forwardRef((props, ref) => {
                   : theme.colors.textPrimary
               }
             >
-              {value ?? placeholder}
+              {value || placeholder}
             </Text>
           </View>
         ) : (

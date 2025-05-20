@@ -64,6 +64,7 @@ const CommonModal = ({
   enableSwipe = false,
   showsVerticalScrollIndicator = false,
   bounces = false,
+  isCancellable = true,
   ...rest
 }) => {
   const iModalContentStyle = StyleSheet.flatten([
@@ -82,12 +83,12 @@ const CommonModal = ({
   return (
     <Modal
       isVisible={isVisible}
-      onBackdropPress={onModalHide}
-      onBackButtonPress={onModalHide}
+      onBackdropPress={isCancellable === false ? undefined : onModalHide}
+      onBackButtonPress={isCancellable === false ? undefined : onModalHide}
       animationIn="slideInUp"
       animationOut="slideOutDown"
-      swipeDirection={enableSwipe ? "down" : null} // swipe to dismiss
-      onSwipeComplete={onModalHide}
+      swipeDirection={enableSwipe && isCancellable !== false ? "down" : null}
+      onSwipeComplete={isCancellable === false ? undefined : onModalHide}
       backdropTransitionOutTiming={1}
       style={styles.modal}
       {...rest}
@@ -114,7 +115,7 @@ const CommonModal = ({
             {title && (
               <>
                 <Text
-                  size={"h3"}
+                  size={"h4"}
                   hankenGroteskBold={true}
                   textAlign={isTextCenter ? "center" : "left"}
                 >

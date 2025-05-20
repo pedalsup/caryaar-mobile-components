@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Image,
   StyleSheet,
@@ -6,10 +6,10 @@ import {
   ViewStyle,
   ImageStyle,
   ImageSourcePropType,
-} from 'react-native';
-import images from '../assets/images';
-import {Pressable, Text} from './';
-import theme from '../theme';
+} from "react-native";
+import images from "../assets/images";
+import { Pressable, Text } from "./";
+import theme from "../theme";
 
 type ImageUploadButtonProps = {
   label?: string,
@@ -33,25 +33,26 @@ const ImageUploadButton = ({
   uploadBoxStyle,
   imageStyle,
   previewHeight = 90,
+  isError,
+  statusMsg,
+  statusTextColor,
+  statusMsgStyle,
 }: ImageUploadButtonProps) => {
   return (
     <View style={[styles.container, wrapperStyle]}>
-      {label ? (
-        <Text type="label" >
-          {label}
-        </Text>
-      ) : null}
+      {label ? <Text type="label">{label}</Text> : null}
 
       <Pressable
         style={[styles.uploadBox, uploadBoxStyle]}
-        onPress={handleImagePick}>
+        onPress={handleImagePick}
+      >
         {image ? (
           <Image
-            source={{uri: image}}
-            style={[styles.imagePreview, {height: previewHeight}, imageStyle]}
+            source={{ uri: image }}
+            style={[styles.imagePreview, { height: previewHeight }, imageStyle]}
           />
         ) : (
-          <View style={[styles.dashedWrapper, {height: previewHeight}]}>
+          <View style={[styles.dashedWrapper, { height: previewHeight }]}>
             <Image source={images.icUpload} style={styles.icon} />
             <Text type="helper-text" size="caption" textAlign="center">
               {btnLabel}
@@ -59,35 +60,52 @@ const ImageUploadButton = ({
           </View>
         )}
       </Pressable>
+
+      {isError ? (
+        <Text
+          type={"status"}
+          lineHeight={theme.typography.lineHeights.small}
+          style={[
+            { alignSelf: "flex-start" },
+            {
+              color:
+                statusTextColor ?? isError
+                  ? theme.colors.error
+                  : theme.colors.success,
+            },
+            statusMsgStyle,
+          ]}
+        >
+          {statusMsg}
+        </Text>
+      ) : null}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {},
-  label: {
-
-  },
+  label: {},
   uploadBox: {
     borderRadius: 12,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: "#F9F9F9",
     padding: 7,
     marginTop: theme.sizes.spacing.sm,
   },
   dashedWrapper: {
     borderWidth: 1.5,
-    borderStyle: 'dashed',
-    borderColor: '#5DB4F2',
+    borderStyle: "dashed",
+    borderColor: "#5DB4F2",
     borderRadius: 12,
-    backgroundColor: '#E9F4FD',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal:10
+    backgroundColor: "#E9F4FD",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 10,
   },
   imagePreview: {
-    width: '100%',
+    width: "100%",
     borderRadius: 8,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   icon: {
     width: 28,

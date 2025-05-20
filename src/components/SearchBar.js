@@ -1,20 +1,12 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Image, StyleSheet, View } from "react-native";
+// components/SearchBarWithFilter.js
+import React, { useCallback, useMemo, useState, useEffect } from "react";
+import { View, Image, StyleSheet } from "react-native";
 import _ from "lodash";
+import { Input, Pressable, Spacing } from "./";
 import images from "../assets/images";
 import theme from "../theme";
-import { Input, Pressable, Spacing, Text, SearchBar } from "./";
 
-const ImageHeader = ({
-  profileImage = "",
-  titleText = "CarYaar",
-  subTittle = "",
-  searchPlaceHolder = "Search",
-  hideSubHeader = false,
-  showSearch = true,
-  hideProfileIcon = false,
-  showAddBtn = false,
+const SearchBar = ({
   value,
   defaultValue,
   debounceDelay,
@@ -22,13 +14,12 @@ const ImageHeader = ({
   onChangeText = () => {},
   onCancelIconPress,
   onSubmitEditing,
-  onAddButtonPress,
   onFilterPress = () => {},
-  onLeftIconPress,
-  onRightIconPress,
-  rightIconName,
+  onAddButtonPress,
+  searchPlaceHolder = "Search",
   enableBlurOnSubmit = true,
   enableBlurOnInputBlur = false,
+  showAddBtn = false,
 }) => {
   const [searchText, setSearchText] = useState("");
 
@@ -84,77 +75,44 @@ const ImageHeader = ({
 
   useEffect(() => {
     setSearchText(value || defaultValue || "");
-    return () => {
-      debouncedResults.cancel();
-    };
+    return () => debouncedResults.cancel();
   }, [value, defaultValue, debouncedResults]);
 
   const isEmpty = _.isEmpty(searchText);
 
   return (
-    <>
-      <View style={styles.header}>
-        <View style={styles.profileRow}>
-          {!hideProfileIcon && (
-            <Pressable onPress={onLeftIconPress}>
-              <Image source={{ uri: profileImage }} style={styles.avatar} />
-            </Pressable>
-          )}
-          <Text
-            hankenGroteskExtraBold
-            size={28}
-            lineHeight="h2"
-            color={theme.colors.primaryLight}
-          >
-            {titleText}
-          </Text>
-          <Pressable style={styles.bell} onPress={onRightIconPress}>
-            <Image
-              source={rightIconName || images.notificationOutline}
-              style={styles.bellIcon}
-            />
-          </Pressable>
-        </View>
+    <View style={styles.searchRow}>
+      <View style={styles.searchInputWrapper}>
+        <Input
+          leftIconName={images.icSearch}
+          isLeftIconVisible
+          inputContainerBackgroundColor="#222222"
+          inputContainerBackgroundColorFocused="#222222"
+          themeColor={theme.colors.textSecondary}
+          placeholder={searchPlaceHolder}
+          onChangeText={handleChange}
+          value={searchText}
+          isRightIconVisible={!isEmpty}
+          rightIconName={images.cancel}
+          rightIconColor={theme.colors.primary}
+          onRightIconPress={handleCancel}
+          onBlur={() => {
+            if (enableBlurOnInputBlur) {
+              handleBlur();
+            }
+          }}
+          onSubmitEditing={onSubmitPressed}
+          rightIcnDisable={false}
+          returnKeyType={"search"}
+        />
       </View>
 
-      {!hideSubHeader && (
-        <View style={styles.subHeader}>
-          <View style={styles.subHeaderTopRow}>
-            <Text hankenGroteskExtraBold color="white" size="h2">
-              {subTittle}
-            </Text>
-            <Pressable onPress={onFilterPress}>
-              <Image
-                resizeMode="contain"
-                source={images.filter}
-                style={styles.filterIcon}
-              />
-            </Pressable>
-          </View>
-
-          {showSearch && (
-            <>
-              <Spacing size="md" />
-              <SearchBar
-                value={value}
-                defaultValue={defaultValue}
-                debounceDelay={debounceDelay}
-                debounceOptions={debounceOptions}
-                onChangeText={onChangeText}
-                onCancelIconPress={onCancelIconPress}
-                onSubmitEditing={onSubmitEditing}
-                onFilterPress={onFilterPress}
-                onAddButtonPress={onAddButtonPress}
-                searchPlaceHolder={searchPlaceHolder}
-                enableBlurOnSubmit={enableBlurOnSubmit}
-                enableBlurOnInputBlur={enableBlurOnInputBlur}
-                showAddBtn={showAddBtn}
-              />
-            </>
-          )}
-        </View>
+      {showAddBtn && (
+        <Pressable style={styles.addBtnWrapper} onPress={onAddButtonPress}>
+          <Image source={images.icAdd} style={styles.addIcon} />
+        </Pressable>
       )}
-    </>
+    </View>
   );
 };
 
@@ -218,4 +176,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default React.memo(ImageHeader);
+export default React.memo(SearchBar);

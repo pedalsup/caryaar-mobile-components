@@ -41,6 +41,7 @@ const FilePickerModal = ({
   options = DEFAULT_OPTIONS,
   autoCloseOnSelect = true,
   iconTintColor = theme.colors.primary,
+  restModalProp,
 }) => {
   /**
    * Handles the selection of an option.
@@ -63,6 +64,7 @@ const FilePickerModal = ({
       isPrimaryButtonVisible={false}
       isTextCenter={false}
       title={title}
+      {...restModalProp}
     >
       {options.map(({ label, value, icon }) => (
         <Pressable

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import { Card, Pressable, Spacing, Text } from "./";
 import theme from "../theme";
 import { isLastRow } from "../utils/helper";
@@ -34,6 +34,7 @@ const DetailInfoCard = ({
   isSemiBold,
   children,
   bottom = false,
+  onChange,
 }) => {
   return (
     <>
@@ -63,20 +64,38 @@ const DetailInfoCard = ({
                 </Text>
 
                 <Pressable onPress={item?.onPress} disabled={!item?.isButton}>
-                  <Text
-                    hankenGroteskMedium={!isSemiBold && !item?.isButton}
-                    hankenGroteskSemiBold={isSemiBold}
-                    hankenGroteskBold={item?.isButton}
-                    color={
-                      item?.isButton
-                        ? theme.colors.primary
-                        : theme.colors.textPrimary
-                    }
-                    size="small"
-                    lineHeight="small"
-                  >
-                    {item.value}
-                  </Text>
+                  {item.value ? (
+                    <Text
+                      hankenGroteskMedium={!isSemiBold && !item?.isButton}
+                      hankenGroteskSemiBold={isSemiBold}
+                      hankenGroteskBold={item?.isButton}
+                      color={
+                        item?.isButton
+                          ? theme.colors.primary
+                          : theme.colors.textPrimary
+                      }
+                      size="small"
+                      lineHeight="small"
+                    >
+                      {item.value}
+                    </Text>
+                  ) : (
+                    <TextInput
+                      value={item.value}
+                      placeholder={`Enter value`}
+                      onChangeText={(text) => onChange?.(index, text)}
+                      style={[
+                        {
+                          color: theme.colors.textPrimary,
+                          fontSize: theme.typography.fontSizes.small,
+                          lineHeight: theme.typography.lineHeights.small,
+                        },
+                        isSemiBold
+                          ? theme.typography.fontStyles.hankenGroteskSemiBold
+                          : theme.typography.fontStyles.hankenGroteskMedium,
+                      ]}
+                    />
+                  )}
                 </Pressable>
               </View>
             ))}

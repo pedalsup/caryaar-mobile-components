@@ -47,4 +47,8 @@ export { default as Status } from "./Status";
 export { default as FilePickerModal } from "./FilePickerModal";
 export { default as DocumentRow } from "./DocumentRow";
 export { default as Dropdown } from "./Dropdown";
+export { default as Loader } from "./Loader";
+export { default as PaginationFooter } from "./PaginationFooter";
+export { default as SearchBar } from "./SearchBar";
+export { default as OTPModal } from "./OTPModal";
 export * from "./Toast";

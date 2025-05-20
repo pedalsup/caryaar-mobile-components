@@ -80,7 +80,11 @@ const CustomerCard = ({
   const renderHeader = () => (
     <View style={styles.header}>
       {!hideLogo && (
-        <Image source={logo || images.placeholder_image} style={styles.logo} />
+        <Image
+          source={logo || images.placeholder_image}
+          style={styles.logo}
+          defaultSource={images.placeholder_image}
+        />
       )}
       <View style={styles.flex}>
         {brandName && (
