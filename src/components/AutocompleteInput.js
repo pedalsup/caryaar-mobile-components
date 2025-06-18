@@ -51,8 +51,11 @@ const AutocompleteInput = React.forwardRef(
       }, debounceTime)
     ).current;
 
+    const getNestedValue = (obj, path) =>
+      path.split(".").reduce((acc, part) => acc?.[part], obj);
+
     const handleSelect = (item) => {
-      const selectedText = item?.[suggestionTextKey] || "";
+      const selectedText = getNestedValue(item, suggestionTextKey) || "";
       setInputValue(selectedText);
       onSelectSuggestion?.(item);
       setShowSuggestions(false);
@@ -100,7 +103,7 @@ const AutocompleteInput = React.forwardRef(
                   onPress={() => handleSelect(item)}
                 >
                   <Text size="small" lineHeight="small">
-                    {item?.[suggestionTextKey]}
+                    {getNestedValue(item, suggestionTextKey)}
                   </Text>
                 </Pressable>
               )}

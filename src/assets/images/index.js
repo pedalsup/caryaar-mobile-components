@@ -91,4 +91,5 @@ export default {
   icon_info: require("./icon_info.png"),
   warning: require("./warning.png"),
   critical_alert: require("./critical_alert.png"),
+  icFilterClose: require("./icFilterClose.png"),
 };

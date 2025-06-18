@@ -37,28 +37,60 @@ const ImageUploadButton = ({
   statusMsg,
   statusTextColor,
   statusMsgStyle,
+  viewImage,
+  isDocument,
+  fileType,
+  onDeletePress,
+  isView,
 }: ImageUploadButtonProps) => {
+  const renderImageContent = () => {
+    if (image) {
+      return (
+        <>
+          {isDocument ? (
+            <View style={[styles.dashedWrapper, { height: previewHeight }]}>
+              <Image
+                source={images.applicationSolid} // your document icon here
+                style={styles.documentIcon}
+              />
+              <Text size={"small"}>{fileType}</Text>
+            </View>
+          ) : (
+            <Image
+              source={{ uri: image }}
+              style={[
+                styles.imagePreview,
+                { height: previewHeight },
+                imageStyle,
+              ]}
+            />
+          )}
+          {!isView && (
+            <Pressable onPress={onDeletePress} style={styles.deleteIcon}>
+              <Image source={images.icDelete} style={styles.iconOverlay} />
+            </Pressable>
+          )}
+        </>
+      );
+    }
+
+    return (
+      <Pressable style={[uploadBoxStyle]} onPress={handleImagePick}>
+        <View style={[styles.dashedWrapper, { height: previewHeight }]}>
+          <Image source={images.icUpload} style={styles.icon} />
+          <Text type="helper-text" size="caption" textAlign="center">
+            {btnLabel}
+          </Text>
+        </View>
+      </Pressable>
+    );
+  };
   return (
     <View style={[styles.container, wrapperStyle]}>
       {label ? <Text type="label">{label}</Text> : null}
 
-      <Pressable
-        style={[styles.uploadBox, uploadBoxStyle]}
-        onPress={handleImagePick}
-      >
-        {image ? (
-          <Image
-            source={{ uri: image }}
-            style={[styles.imagePreview, { height: previewHeight }, imageStyle]}
-          />
-        ) : (
-          <View style={[styles.dashedWrapper, { height: previewHeight }]}>
-            <Image source={images.icUpload} style={styles.icon} />
-            <Text type="helper-text" size="caption" textAlign="center">
-              {btnLabel}
-            </Text>
-          </View>
-        )}
+      <Pressable style={[styles.uploadBox, uploadBoxStyle]} onPress={viewImage}>
+        {renderImageContent()}
       </Pressable>
 
       {isError ? (
@@ -111,6 +143,24 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     marginBottom: 8,
+  },
+  documentIcon: {
+    width: 30,
+    height: 30,
+    resizeMode: "contain",
+    marginBottom: 5,
+  },
+
+  deleteIcon: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    height: 28,
+    width: 28,
+  },
+  iconOverlay: {
+    width: 28,
+    height: 28,
   },
 });
 

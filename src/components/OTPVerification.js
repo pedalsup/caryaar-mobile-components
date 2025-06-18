@@ -102,7 +102,7 @@ const OTPVerification = ({
             focusedIndex === index && [styles.otpFocused, focusedInputStyle],
           ]}
           keyboardType="numeric"
-          secureTextEntry
+          secureTextEntry={secureTextEntry}
           maxLength={1}
           value={digit}
           onChangeText={(text) => handleChange(text, index)}

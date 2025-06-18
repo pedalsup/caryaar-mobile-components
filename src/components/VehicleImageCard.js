@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
-import {Text, Pressable, Card} from '.';
-import theme from '../theme';
-import images from '../assets/images';
+import React from "react";
+import { View, StyleSheet, Image } from "react-native";
+import { Text, Pressable, Card } from ".";
+import theme from "../theme";
+import images from "../assets/images";
 
 const VehicleImageCard = ({
   label,
@@ -27,11 +27,11 @@ const VehicleImageCard = ({
                 source={images.applicationSolid} // your document icon here
                 style={styles.documentIcon}
               />
-              <Text size={'small'}>{fileType}</Text>
+              <Text size={"small"}>{fileType}</Text>
             </>
           ) : (
             <Image
-              source={{uri: image}}
+              source={{ uri: image }}
               style={styles.image}
               defaultSource={images.placeholder_image}
             />
@@ -49,7 +49,11 @@ const VehicleImageCard = ({
     // when no image/document uploaded yet
     return (
       <View style={[styles.dashedWrapper, styles.uploadImage]}>
-        <Pressable onPress={uploadMedia} style={styles.centeredContent}>
+        <Pressable
+          disabled={isView}
+          onPress={uploadMedia}
+          style={styles.centeredContent}
+        >
           <Image source={images.icUpload} style={styles.icon} />
           <Text type="helper-text" size="caption" textAlign="center">
             {btnLabel}
@@ -63,7 +67,8 @@ const VehicleImageCard = ({
     <Card
       style={[styles.card, cardWrapper]}
       padding={0}
-      cardContainerStyle={{paddingHorizontal: 8, paddingVertical: 12}}>
+      cardContainerStyle={{ paddingHorizontal: 8, paddingVertical: 12 }}
+    >
       <Text size="small">{label}</Text>
       <Pressable style={styles.imageContainer} onPress={viewImage}>
         {renderImageContent()}
@@ -81,30 +86,30 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   imageContainer: {
-    position: 'relative',
+    position: "relative",
     borderRadius: 8,
-    overflow: 'hidden',
+    overflow: "hidden",
     height: 115,
-    backgroundColor: '#F9F9F9',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#F9F9F9",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 12,
     padding: 5,
   },
   image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
     borderRadius: 8,
   },
   documentIcon: {
     width: 50,
     height: 50,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     marginBottom: 10,
   },
   deleteIcon: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     right: 0,
     height: 28,
@@ -115,26 +120,26 @@ const styles = StyleSheet.create({
     height: 28,
   },
   uploadImage: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   viewIcon: {
-    position: 'absolute',
+    position: "absolute",
     height: 28,
     width: 28,
   },
   dashedWrapper: {
     borderWidth: 1.5,
-    borderStyle: 'dashed',
-    borderColor: '#5DB4F2',
+    borderStyle: "dashed",
+    borderColor: "#5DB4F2",
     borderRadius: 12,
-    backgroundColor: '#E9F4FD',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#E9F4FD",
+    alignItems: "center",
+    justifyContent: "center",
   },
   centeredContent: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     flex: 1,
   },
   icon: {

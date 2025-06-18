@@ -17,6 +17,7 @@ const OTPModal = ({
   isCancellable = false,
   isError,
   errorMessage,
+  secureTextEntry,
 }) => {
   const [countdown, setCountdown] = useState(initialCountdown);
   const [resendEnabled, setResendEnabled] = useState(false);
@@ -85,7 +86,10 @@ const OTPModal = ({
         </View>
 
         <Spacing size={"md_lg"} />
-        <OTPVerification onOtpComplete={onOtpComplete} />
+        <OTPVerification
+          onOtpComplete={onOtpComplete}
+          secureTextEntry={secureTextEntry}
+        />
 
         {isError && (
           <>

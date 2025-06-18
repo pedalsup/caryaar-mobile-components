@@ -97,7 +97,15 @@ const ImageHeader = ({
         <View style={styles.profileRow}>
           {!hideProfileIcon && (
             <Pressable onPress={onLeftIconPress}>
-              <Image source={{ uri: profileImage }} style={styles.avatar} />
+              <Image
+                defaultSource={images.placeholder_image}
+                source={
+                  profileImage
+                    ? { uri: profileImage }
+                    : images.placeholder_image
+                }
+                style={styles.avatar}
+              />
             </Pressable>
           )}
           <Text

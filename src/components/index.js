@@ -51,4 +51,7 @@ export { default as Loader } from "./Loader";
 export { default as PaginationFooter } from "./PaginationFooter";
 export { default as SearchBar } from "./SearchBar";
 export { default as OTPModal } from "./OTPModal";
+export { default as AutocompleteInput } from "./AutocompleteInput";
+export { default as StatusChip } from "./StatusChip";
+export { default as InitialsAvatar } from "./InitialsAvatar";
 export * from "./Toast";

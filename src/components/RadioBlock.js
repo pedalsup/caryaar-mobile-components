@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 import {
   Image,
   StyleSheet,
   ViewStyle,
   ImageStyle,
   StyleProp,
-} from 'react-native';
-import {Pressable, Text} from '.';
-import images from '../assets/images';
-import theme from '../theme';
+} from "react-native";
+import { Pressable, Text } from ".";
+import images from "../assets/images";
+import theme from "../theme";
 
 type RadioBlockProps = {
   label: string,
@@ -30,11 +30,23 @@ const RadioBlock = ({
   selectedIcon = images.radio_selected,
   unselectedIcon = images.radio_unselected,
   textProps,
+  isDisabled,
 }: RadioBlockProps) => {
   return (
     <Pressable
-      style={[styles.block, isSelected && styles.blockSelected, wrapperStyle]}
-      onPress={onPress}>
+      disabled={isDisabled}
+      style={[
+        styles.block,
+        isSelected && styles.blockSelected,
+        wrapperStyle,
+        isDisabled && {
+          borderColor: theme.colors.textSecondary,
+          borderWidth: 1,
+          opacity: 0.8,
+        },
+      ]}
+      onPress={onPress}
+    >
       <Image
         source={isSelected ? selectedIcon : unselectedIcon}
         style={[styles.radioIcon, iconStyle]}
@@ -43,7 +55,8 @@ const RadioBlock = ({
         size="small"
         hankenGroteskMedium={isSelected}
         color={isSelected ? theme.colors.black : theme.colors.textSecondary}
-        {...textProps}>
+        {...textProps}
+      >
         {label}
       </Text>
     </Pressable>
@@ -52,8 +65,8 @@ const RadioBlock = ({
 
 const styles = StyleSheet.create({
   block: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderWidth: 1.5,

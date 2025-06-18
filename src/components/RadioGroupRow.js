@@ -1,7 +1,7 @@
-import React from 'react';
-import {View, StyleSheet, ViewStyle} from 'react-native';
-import Text from './Text';
-import RadioBlock from './RadioBlock';
+import React from "react";
+import { View, StyleSheet, ViewStyle } from "react-native";
+import Text from "./Text";
+import RadioBlock from "./RadioBlock";
 
 export type RadioOption = {
   label: string,
@@ -30,12 +30,13 @@ const RadioGroupRow = ({
   onChange,
   renderItem,
   containerStyle,
+  restInputProps,
 }: RadioGroupRowProps) => {
   return (
     <View style={containerStyle}>
       {label ? <Text type="label">{label}</Text> : null}
       <View style={styles.row}>
-        {options.map(option => {
+        {options.map((option) => {
           const isSelected = selectedValue === option.value;
           const handlePress = () => onChange(option.value);
 
@@ -54,6 +55,7 @@ const RadioGroupRow = ({
               isSelected={isSelected}
               onPress={handlePress}
               wrapperStyle={styles.flex}
+              {...restInputProps}
             />
           );
         })}
@@ -64,8 +66,8 @@ const RadioGroupRow = ({
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     gap: 10,
     marginTop: 8,
   },
