@@ -40,6 +40,7 @@ const DropdownModal = ({
   containerStyle,
   keyValue = "label",
   primaryButtonLabel,
+  labelStyle,
   ...rest
 }) => {
   /**
@@ -63,6 +64,7 @@ const DropdownModal = ({
           onClose();
         }}
         marginBottom={theme.sizes.spacing.md}
+        labelStyle={labelStyle}
       />
     );
   };

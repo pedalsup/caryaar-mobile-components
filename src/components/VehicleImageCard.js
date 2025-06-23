@@ -4,6 +4,7 @@ import { View, StyleSheet, Image } from "react-native";
 import { Text, Pressable, Card } from ".";
 import theme from "../theme";
 import images from "../assets/images";
+import FastImage from "react-native-fast-image";
 
 const VehicleImageCard = ({
   label,
@@ -30,10 +31,14 @@ const VehicleImageCard = ({
               <Text size={"small"}>{fileType}</Text>
             </>
           ) : (
-            <Image
-              source={{ uri: image }}
+            <FastImage
+              source={{
+                uri: image,
+                priority: FastImage.priority.normal,
+              }}
               style={styles.image}
               defaultSource={images.placeholder_image}
+              // resizeMode={FastImage.resizeMode.cover}
             />
           )}
 

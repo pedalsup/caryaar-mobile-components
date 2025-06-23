@@ -194,5 +194,9 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     width: "100%",
+    paddingBottom: Platform.select({
+      ios: 24,
+      android: 0,
+    }),
   },
 });
