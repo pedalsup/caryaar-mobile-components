@@ -90,6 +90,7 @@ const AutocompleteInput = React.forwardRef(
                 `${suggestionTextKey} - ${item.id || index}`
               }
               keyboardShouldPersistTaps="handled"
+              nestedScrollEnabled
               renderItem={({ item, index }) => (
                 <Pressable
                   style={[

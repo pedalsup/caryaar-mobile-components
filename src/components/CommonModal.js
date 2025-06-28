@@ -12,6 +12,7 @@ import {
 import Modal from "react-native-modal";
 import images from "../assets/images";
 import { Button, Pressable, Spacing, Text } from "./";
+import { theme } from "../theme";
 
 const screenHeight = Dimensions.get("window").height;
 /**
@@ -65,6 +66,9 @@ const CommonModal = ({
   showsVerticalScrollIndicator = false,
   bounces = false,
   isCancellable = true,
+  primaryBgColor,
+  restPrimaryButtonProp,
+  tittleColor = theme.colors.textPrimary,
   ...rest
 }) => {
   const iModalContentStyle = StyleSheet.flatten([
@@ -118,6 +122,7 @@ const CommonModal = ({
                   size={"h4"}
                   hankenGroteskBold={true}
                   textAlign={isTextCenter ? "center" : "left"}
+                  color={tittleColor}
                 >
                   {title}
                 </Text>
@@ -140,6 +145,7 @@ const CommonModal = ({
                 <Button
                   label={primaryButtonLabel}
                   onPress={onPressPrimaryButton}
+                  {...restPrimaryButtonProp}
                 />
                 <Spacing size="md" />
               </>
@@ -196,7 +202,7 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingBottom: Platform.select({
       ios: 24,
-      android: 0,
+      android: 12,
     }),
   },
 });

@@ -17,6 +17,7 @@ const VehicleImageCard = ({
   uploadMedia,
   isDocument, // <-- this prop identifies if it’s a doc/pdf
   fileType,
+  acceptedDocument,
 }) => {
   const renderImageContent = () => {
     if (image) {
@@ -31,15 +32,20 @@ const VehicleImageCard = ({
               <Text size={"small"}>{fileType}</Text>
             </>
           ) : (
-            <FastImage
-              source={{
-                uri: image,
-                priority: FastImage.priority.normal,
-              }}
+            <Image
+              source={{ uri: image }}
               style={styles.image}
               defaultSource={images.placeholder_image}
-              // resizeMode={FastImage.resizeMode.cover}
             />
+            // <FastImage
+            //   source={{
+            //     uri: image,
+            //     priority: FastImage.priority.normal,
+            //   }}
+            //   style={styles.image}
+            //   defaultSource={images.placeholder_image}
+            //   // resizeMode={FastImage.resizeMode.cover}
+            // />
           )}
 
           {!isView && (
@@ -79,6 +85,15 @@ const VehicleImageCard = ({
         {renderImageContent()}
         {isView && <Image source={images.viewIcon} style={styles.viewIcon} />}
       </Pressable>
+      {acceptedDocument ? (
+        <Text
+          size="small"
+          color={theme.colors.textLabel}
+          style={{ marginTop: 12 }}
+        >
+          {acceptedDocument}
+        </Text>
+      ) : null}
     </Card>
   );
 };

@@ -63,6 +63,7 @@ const ImageUploadButton = ({
                 { height: previewHeight },
                 imageStyle,
               ]}
+              defaultSource={images.placeholder_image}
             />
           )}
           {!isView && (

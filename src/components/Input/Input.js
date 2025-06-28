@@ -281,7 +281,7 @@ const Input = React.forwardRef((props, ref) => {
 
         {isRightIconVisible && (
           <RightIcon
-            onRightIconPress={onRightIconPress}
+            onRightIconPress={isAsDropdown ? onPress : onRightIconPress}
             rightIcon={rightIcon}
             isDisabled={rightIcnDisable}
             rightIconStyle={rightIconStyle}

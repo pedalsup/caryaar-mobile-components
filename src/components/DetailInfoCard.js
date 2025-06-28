@@ -64,38 +64,20 @@ const DetailInfoCard = ({
                 </Text>
 
                 <Pressable onPress={item?.onPress} disabled={!item?.isButton}>
-                  {item.value ? (
-                    <Text
-                      hankenGroteskMedium={!isSemiBold && !item?.isButton}
-                      hankenGroteskSemiBold={isSemiBold}
-                      hankenGroteskBold={item?.isButton}
-                      color={
-                        item?.isButton
-                          ? theme.colors.primary
-                          : theme.colors.textPrimary
-                      }
-                      size="small"
-                      lineHeight="small"
-                    >
-                      {item.value}
-                    </Text>
-                  ) : (
-                    <TextInput
-                      value={item.value}
-                      placeholder={`Enter value`}
-                      onChangeText={(text) => onChange?.(index, text)}
-                      style={[
-                        {
-                          color: theme.colors.textPrimary,
-                          fontSize: theme.typography.fontSizes.small,
-                          lineHeight: theme.typography.lineHeights.small,
-                        },
-                        isSemiBold
-                          ? theme.typography.fontStyles.hankenGroteskSemiBold
-                          : theme.typography.fontStyles.hankenGroteskMedium,
-                      ]}
-                    />
-                  )}
+                  <Text
+                    hankenGroteskMedium={!isSemiBold && !item?.isButton}
+                    hankenGroteskSemiBold={isSemiBold}
+                    hankenGroteskBold={item?.isButton}
+                    color={
+                      item?.isButton
+                        ? theme.colors.primary
+                        : theme.colors.textPrimary
+                    }
+                    size="small"
+                    lineHeight="small"
+                  >
+                    {item.value || "-"}
+                  </Text>
                 </Pressable>
               </View>
             ))}
