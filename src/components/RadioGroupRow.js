@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, ViewStyle } from "react-native";
 import Text from "./Text";
 import RadioBlock from "./RadioBlock";
+import theme from "../theme";
 
 export type RadioOption = {
   label: string,
@@ -31,6 +32,8 @@ const RadioGroupRow = ({
   renderItem,
   containerStyle,
   restInputProps,
+  statusMsg,
+  restRadioProps,
 }: RadioGroupRowProps) => {
   return (
     <View style={containerStyle}>
@@ -60,6 +63,20 @@ const RadioGroupRow = ({
           );
         })}
       </View>
+      {statusMsg && (
+        <Text
+          type={"status"}
+          lineHeight={theme.typography.lineHeights.small}
+          style={[
+            {
+              color: theme.colors.error,
+              marginTop: 8,
+            },
+          ]}
+        >
+          {statusMsg}
+        </Text>
+      )}
     </View>
   );
 };
