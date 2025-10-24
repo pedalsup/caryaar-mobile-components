@@ -17,10 +17,7 @@ const FormFooterButtons = ({
 }) => {
   const isRow = direction === "row";
 
-  const iWrapperStyle = StyleSheet.flatten([
-    isRow && styles.buttonRow,
-    { marginTop: theme.sizes.spacing.xl },
-  ]);
+  const iWrapperStyle = StyleSheet.flatten([isRow && styles.buttonRow]);
 
   const iButtonStyle = StyleSheet.flatten([
     isRow && styles.button,
@@ -34,6 +31,7 @@ const FormFooterButtons = ({
         variant={isRow ? "link" : "solid"}
         buttonWrapper={[iButtonStyle, primaryButtonStyle]}
         onPress={onPressPrimaryButton}
+        hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }}
         {...extraPropPrimaryButton}
       />
       {!hideSecondaryButton && (
@@ -43,6 +41,7 @@ const FormFooterButtons = ({
           style={[iButtonStyle, secondaryButtonStyle]}
           buttonWrapper={styles.button}
           onPress={onPressSecondaryButton}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           {...extraPropSecondaryButton}
         />
       )}
@@ -53,11 +52,12 @@ const FormFooterButtons = ({
 const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
+    gap: 8,
   },
   button: {
     flex: 1,
-    marginHorizontal: 4, // Small spacing between buttons
+    // marginHorizontal: 5, // Small spacing between buttons
   },
 });
 
