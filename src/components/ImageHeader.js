@@ -131,7 +131,10 @@ const ImageHeader = ({
             <Text hankenGroteskExtraBold color="white" size="h2">
               {subTittle}
             </Text>
-            <Pressable onPress={onFilterPress}>
+            <Pressable
+              onPress={onFilterPress}
+              hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }}
+            >
               <Image
                 resizeMode="contain"
                 source={images.filter}

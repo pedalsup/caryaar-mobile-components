@@ -18,6 +18,10 @@ const VehicleImageCard = ({
   isDocument, // <-- this prop identifies if it’s a doc/pdf
   fileType,
   acceptedDocument,
+  statusMsgStyle,
+  statusTextColor,
+  isError,
+  statusMsg,
 }) => {
   const renderImageContent = () => {
     if (image) {
@@ -92,6 +96,24 @@ const VehicleImageCard = ({
           style={{ marginTop: 12 }}
         >
           {acceptedDocument}
+        </Text>
+      ) : null}
+      {isError ? (
+        <Text
+          type={"status"}
+          lineHeight={theme.typography.lineHeights.small}
+          style={[
+            { alignSelf: "flex-start" },
+            {
+              color:
+                statusTextColor ?? isError
+                  ? theme.colors.error
+                  : theme.colors.success,
+            },
+            statusMsgStyle,
+          ]}
+        >
+          {statusMsg}
         </Text>
       ) : null}
     </Card>

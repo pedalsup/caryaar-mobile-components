@@ -63,7 +63,11 @@ const DetailInfoCard = ({
                   {item.label}
                 </Text>
 
-                <Pressable onPress={item?.onPress} disabled={!item?.isButton}>
+                <Pressable
+                  onPress={item?.onPress}
+                  disabled={!item?.isButton}
+                  hitSlop={{ top: 24, bottom: 24, left: 24, right: 24 }}
+                >
                   <Text
                     hankenGroteskMedium={!isSemiBold && !item?.isButton}
                     hankenGroteskSemiBold={isSemiBold}

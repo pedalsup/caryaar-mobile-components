@@ -5,14 +5,18 @@ import images from "../assets/images";
 
 const StatusChip = ({ label, onRemove, style = {}, textStyle = {} }) => {
   return (
-    <View style={[styles.chip, style]}>
+    <Pressable
+      onPress={onRemove}
+      style={[styles.chip, style]}
+      hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+    >
       <Text hankenGroteskBold size={"small"} style={[textStyle]}>
         {label}
       </Text>
-      <Pressable onPress={onRemove}>
-        <Image source={images.icFilterClose} style={styles.closeIcon} />
-      </Pressable>
-    </View>
+      {/* <Pressable onPress={()=> console.log("---")}  hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}> */}
+      <Image source={images.icFilterClose} style={styles.closeIcon} />
+      {/* </Pressable> */}
+    </Pressable>
   );
 };
 

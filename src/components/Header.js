@@ -1,13 +1,13 @@
-import React from 'react';
-import {Image, StyleSheet, View, ViewStyle, TextStyle} from 'react-native';
-import {Pressable, Text} from '.';
-import theme from '../theme';
-import images from '../assets/images';
+import React from "react";
+import { Image, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
+import { Pressable, Text } from ".";
+import images from "../assets/images";
+import theme from "../theme";
 
 const Header = ({
-  title = '',
-  subtitle = '',
-  rightLabel = '',
+  title = "",
+  subtitle = "",
+  rightLabel = "",
   onBackPress = () => {},
   containerStyle = {},
   titleStyle = {},
@@ -46,15 +46,19 @@ const Header = ({
   const _containerStyle = [
     styles.container,
     containerStyle,
-    backgroundColor && {backgroundColor},
-    {height: subtitle ? 72 : 64},
-    hideBorder && {borderBottomWidth: 0},
+    backgroundColor && { backgroundColor },
+    { height: subtitle ? 72 : 64 },
+    hideBorder && { borderBottomWidth: 0 },
   ];
 
   return (
     <View style={_containerStyle}>
       <View style={styles.leftContainer}>
-        <Pressable onPress={onBackPress} style={styles.backIconContainer}>
+        <Pressable
+          onPress={onBackPress}
+          style={styles.backIconContainer}
+          hitSlop={{ top: 24, bottom: 24, left: 24, right: 24 }}
+        >
           <Image
             source={images.arrow_left}
             style={{
@@ -71,7 +75,8 @@ const Header = ({
             color={_themedColor}
             size="h3"
             numberOfLines={1}
-            style={titleStyle}>
+            style={titleStyle}
+          >
             {title}
           </Text>
           {subtitle ? (
@@ -79,7 +84,8 @@ const Header = ({
               size="small"
               hankenGroteskSemiBold
               color={theme.colors.textLabel}
-              style={subtitleStyle}>
+              style={subtitleStyle}
+            >
               {subtitle}
             </Text>
           ) : null}
@@ -90,7 +96,9 @@ const Header = ({
         <Pressable
           style={styles.rightContainer}
           onPress={onPressRightContent}
-          disabled={isRightDisabled}>
+          disabled={isRightDisabled}
+          hitSlop={{ top: 24, bottom: 24, left: 24, right: 24 }}
+        >
           {rightIconName ? (
             <Image
               resizeMode="contain"
@@ -101,8 +109,9 @@ const Header = ({
             <Text
               hankenGroteskBold
               size="small"
-              color={rightLabelColor ?? '#F8A90280'}
-              style={rightLabelStyle}>
+              color={rightLabelColor ?? "#F8A90280"}
+              style={rightLabelStyle}
+            >
               {rightLabel}
             </Text>
           )}
@@ -117,27 +126,27 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primaryBlack,
     paddingHorizontal: theme.sizes.spacing.md,
     paddingVertical: theme.sizes.spacing.smd,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.borderLight,
   },
   leftContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     flex: 1,
-    alignItems: 'flex-start',
-    alignContent: 'center',
+    alignItems: "flex-start",
+    alignContent: "center",
   },
   backIconContainer: {
     paddingRight: 12,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   titleBlock: {
     flexShrink: 1,
   },
   rightContainer: {
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    justifyContent: "center",
+    alignItems: "flex-end",
   },
   rightIcon: {
     height: theme.sizes.icons.md,
