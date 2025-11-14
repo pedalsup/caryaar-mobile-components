@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import {Button, Card, RenderInfoBox, Spacing, Text} from '.';
-import images from '../assets/images';
-import theme from '../theme';
+import React from "react";
+import { Image, StyleSheet, View } from "react-native";
+import { Button, Card, RenderInfoBox, Spacing, Text } from ".";
+import images from "../assets/images";
+import theme from "../theme";
 
 const FinanceCard = ({
   bankName,
@@ -22,7 +22,7 @@ const FinanceCard = ({
   footerData = [],
   showRightArrow = false,
   showCTAButton = false, //Call To Action Button
-  ctaLabel = '',
+  ctaLabel = "",
   onCTAPress,
   wrapperColor = theme.colors.white,
   infoWrapperColor,
@@ -35,30 +35,35 @@ const FinanceCard = ({
   breakdownExpression,
   breakdownValue,
 }) => {
-  const getBadgeColors = level => {
+  const getBadgeColors = (level) => {
     switch (level) {
       case 1:
-        return {bg: '#DDEDF9', text: '#1D95F0'};
+        return { bg: "#DDEDF9", text: "#1D95F0" };
       case 2:
-        return {bg: '#EFEEFF', text: '#696EFF'};
+        return { bg: "#EFEEFF", text: "#696EFF" };
       case 3:
-        return {bg: '#EDFAEB', text: '#5FC52E'};
+        return { bg: "#EDFAEB", text: "#5FC52E" };
       default:
-        return {bg: '#FEF0E8', text: '#F3696E'};
+        return { bg: "#FEF0E8", text: "#F3696E" };
     }
   };
 
-  const {bg: badgeBg, text: badgeText} = getBadgeColors(badgeLevel);
+  const { bg: badgeBg, text: badgeText } = getBadgeColors(badgeLevel);
 
   const renderHeader = () => (
     <View style={styles.header}>
-      <Image source={logo} style={styles.logo} />
+      <Image
+        source={logo}
+        style={styles.logo}
+        defaultSource={images.placeholder_image}
+      />
       <View style={styles.flex}>
         <Text
           hankenGroteskMedium
           size="small"
           lineHeight="small"
-          color={textColor}>
+          color={textColor}
+        >
           {bankName}
         </Text>
         <View style={styles.interestRow}>
@@ -75,7 +80,8 @@ const FinanceCard = ({
               <Text
                 type="caption"
                 hankenGroteskSemiBold
-                color={theme.colors.primaryBlack}>
+                color={theme.colors.primaryBlack}
+              >
                 Eligible for BT
               </Text>
             </View>
@@ -100,16 +106,17 @@ const FinanceCard = ({
       cardContainerStyle={[
         styles.cardWrapper,
         cardStyle,
-        {backgroundColor: wrapperColor},
-        hideTopMargin && {marginTop: 0},
+        { backgroundColor: wrapperColor },
+        hideTopMargin && { marginTop: 0 },
       ]}
-      onPress={onPress}>
+      onPress={onPress}
+    >
       {showError && renderErrorMessage()}
 
       {renderHeader()}
 
       {showBadge && (
-        <View style={[styles.badge, {backgroundColor: badgeBg}]}>
+        <View style={[styles.badge, { backgroundColor: badgeBg }]}>
           <Text hankenGroteskBold size="caption" color={badgeText}>
             Lowest Interest
           </Text>
@@ -132,7 +139,7 @@ const FinanceCard = ({
           <Spacing size="smd" />
           <View style={styles.breakdownBox}>
             <Text type="caption" lineHeight={16}>
-              {breakdownExpression} ={' '}
+              {breakdownExpression} ={" "}
               <Text hankenGroteskBold color="#5FC52E" lineHeight={20}>
                 {breakdownValue}
               </Text>
@@ -165,7 +172,7 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   badge: {
-    position: 'absolute',
+    position: "absolute",
     top: -8,
     left: -12,
     paddingVertical: 5,
@@ -173,8 +180,8 @@ const styles = StyleSheet.create({
     borderRadius: 90,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   logo: {
     width: 100,
@@ -187,15 +194,15 @@ const styles = StyleSheet.create({
     width: theme.sizes.icons.smd,
   },
   interestRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   eligibleTag: {
     marginLeft: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     height: 20,
-    backgroundColor: '#5FC52E',
+    backgroundColor: "#5FC52E",
     borderRadius: 90,
     paddingHorizontal: 5,
   },
@@ -205,8 +212,8 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   errorWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 8,
   },
   errorIcon: {
@@ -218,9 +225,9 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 12,
     minHeight: 45,
-    backgroundColor: '#6EEE8740',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#6EEE8740",
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 12,
   },
 });

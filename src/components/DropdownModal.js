@@ -49,7 +49,18 @@ const DropdownModal = ({
    * @returns {JSX.Element} Rendered list item
    */
   const renderItem = ({ item, index }) => {
-    const label = item[keyValue];
+    const getNestedValue = (obj, path) => {
+      try {
+        return path.split(".").reduce((acc, key) => acc && acc[key], obj);
+      } catch {
+        return "";
+      }
+    };
+
+    const label = keyValue.includes(".")
+      ? getNestedValue(item, keyValue)
+      : item[keyValue];
+
     if (customItemRenderer) {
       return customItemRenderer(item, index);
     }
