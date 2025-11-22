@@ -69,6 +69,7 @@ const CommonModal = ({
   primaryBgColor,
   restPrimaryButtonProp,
   tittleColor = theme.colors.textPrimary,
+  spacePrimaryBtn = "md",
   ...rest
 }) => {
   const iModalContentStyle = StyleSheet.flatten([
@@ -141,7 +142,7 @@ const CommonModal = ({
             )}
             {isPrimaryButtonVisible && (
               <>
-                <Spacing size="md" />
+                <Spacing size={spacePrimaryBtn} />
                 <Button
                   label={primaryButtonLabel}
                   onPress={onPressPrimaryButton}

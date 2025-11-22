@@ -81,7 +81,7 @@ const colors = {
   ...statusColor,
   ...GradientColors,
   inputBorder: "rgba(0, 0, 0, 0.12)",
-  yellow: "#FFE100",
+  yellow: "#F8A902",
   gray: "#6c6c6c",
   lightGray1: "#dfe1e0",
   darkGreen: "#4A7B09",
