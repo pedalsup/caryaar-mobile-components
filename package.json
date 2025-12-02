@@ -1,6 +1,6 @@
 {
   "name": "@caryaar/components",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "src/index.js",
   "types": "src/types/index.js",
   "react-native": "src/index.js",
@@ -13,7 +13,9 @@
     "react-native-fast-image": "*",
     "react-native-image-viewing": "*",
     "react-native-keyboard-aware-scroll-view": "*",
-    "react-native-toast-message": "*"
+    "react-native-toast-message": "*",
+    "react-native-ui-datepicker": "*",
+    "moment": "*"
   },
   "devDependencies": {
     "react": "^18.0.0",

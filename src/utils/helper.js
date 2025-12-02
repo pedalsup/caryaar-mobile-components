@@ -74,3 +74,17 @@ export const isLastRow = (index, data, item) => {
 
   return false;
 };
+
+export const getMimeFromUrl = (url) => {
+  if (!url) return null;
+
+  const cleanUrl = url.split("?")[0];
+  const extension = cleanUrl.split(".").pop().toLowerCase();
+
+  const imageExts = ["jpg", "jpeg", "png", "gif", "bmp", "webp"];
+  const docExts = ["pdf", "doc", "docx", "xls", "xlsx"];
+
+  if (imageExts.includes(extension)) return "image";
+  if (docExts.includes(extension)) return extension;
+  return "unknown";
+};

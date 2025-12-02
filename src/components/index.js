@@ -54,4 +54,7 @@ export { default as OTPModal } from "./OTPModal";
 export { default as AutocompleteInput } from "./AutocompleteInput";
 export { default as StatusChip } from "./StatusChip";
 export { default as InitialsAvatar } from "./InitialsAvatar";
+export { default as DatePicker } from "./DatePicker";
+export { default as FullLoader } from "./FullLoader";
+export { default as DocumentGroup } from "./DocumentGroup";
 export * from "./Toast";
